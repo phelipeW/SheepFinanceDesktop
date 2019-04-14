@@ -14,7 +14,7 @@ import java.util.Date;
 public abstract class Transacao {
     public String Descricao;
     public Double Valor;
-    public Date Data;
+    public String Data;
 
     public abstract void Movimentar(Double value);
 }

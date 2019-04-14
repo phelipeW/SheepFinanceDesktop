@@ -14,7 +14,7 @@ import java.util.Date;
 public class Saida extends Transacao {
     public Conta Conta;
     
-    public Saida(Date data, Conta conta, Double valor){
+    public Saida(String data, Conta conta, Double valor){
         Descricao = conta.getNome();
         super.Data = data;
         super.Valor = valor;

@@ -10,7 +10,9 @@ import javax.swing.JOptionPane;
 
 import Control.ControleConta;
 import Control.ControleEntrada;
+import Control.ControleSaida;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 /**
@@ -21,6 +23,7 @@ public class tela1 extends javax.swing.JFrame {
     
     ControleConta controleConta = new ControleConta();
     ControleEntrada controleEntrada = new ControleEntrada();
+    ControleSaida controleSaida = new ControleSaida();
 
     /**
      * Creates new form tela1
@@ -43,7 +46,6 @@ public class tela1 extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jTextFieldValorEntrada = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        jFormattedTextFieldDataEntrada = new javax.swing.JFormattedTextField();
         jComboBoxContaEntrada = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
         jComboBoxMesEntrada = new javax.swing.JComboBox<>();
@@ -51,11 +53,11 @@ public class tela1 extends javax.swing.JFrame {
         jLabelMesEntrada = new javax.swing.JLabel();
         jLabelAnoEntrada = new javax.swing.JLabel();
         jButtonConfirmarEntrada = new javax.swing.JButton();
+        jTextFieldDataEntrada = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         jLabel13 = new javax.swing.JLabel();
         jTextFieldValorSaida = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
-        jFormattedTextFieldDataSaida = new javax.swing.JFormattedTextField();
         jComboBoxContaSaida = new javax.swing.JComboBox<>();
         jLabel15 = new javax.swing.JLabel();
         jComboBoxMesSaida = new javax.swing.JComboBox<>();
@@ -63,6 +65,7 @@ public class tela1 extends javax.swing.JFrame {
         jLabel16 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
         jButtonConfirmarSaida = new javax.swing.JButton();
+        jTextFieldDataSaida = new javax.swing.JTextField();
         jPanel3 = new javax.swing.JPanel();
         jLabel18 = new javax.swing.JLabel();
         jTextFieldNomeConta = new javax.swing.JTextField();
@@ -78,8 +81,6 @@ public class tela1 extends javax.swing.JFrame {
         jLabel1.setText("Valor");
 
         jLabel2.setText("Data");
-
-        jFormattedTextFieldDataEntrada.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter()));
 
         jComboBoxContaEntrada.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
@@ -111,8 +112,8 @@ public class tela1 extends javax.swing.JFrame {
                     .addComponent(jLabel1))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jFormattedTextFieldDataEntrada, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
+                    .addComponent(jLabel2)
+                    .addComponent(jTextFieldDataEntrada, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3)
@@ -128,7 +129,7 @@ public class tela1 extends javax.swing.JFrame {
                         .addComponent(jComboBoxContaEntrada, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButtonConfirmarEntrada)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(352, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -141,9 +142,9 @@ public class tela1 extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextFieldValorEntrada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jFormattedTextFieldDataEntrada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jComboBoxContaEntrada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonConfirmarEntrada))
+                    .addComponent(jButtonConfirmarEntrada)
+                    .addComponent(jTextFieldDataEntrada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(22, 22, 22)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelMesEntrada)
@@ -152,7 +153,7 @@ public class tela1 extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jComboBoxMesEntrada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jComboBoxAnoEntrada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(440, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Entradas", jPanel1);
@@ -160,8 +161,6 @@ public class tela1 extends javax.swing.JFrame {
         jLabel13.setText("Valor");
 
         jLabel14.setText("Data");
-
-        jFormattedTextFieldDataSaida.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter()));
 
         jComboBoxContaSaida.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
@@ -194,7 +193,7 @@ public class tela1 extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel14)
-                    .addComponent(jFormattedTextFieldDataSaida, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextFieldDataSaida, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel15)
@@ -223,9 +222,9 @@ public class tela1 extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextFieldValorSaida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jFormattedTextFieldDataSaida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jComboBoxContaSaida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonConfirmarSaida))
+                    .addComponent(jButtonConfirmarSaida)
+                    .addComponent(jTextFieldDataSaida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(22, 22, 22)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel16)
@@ -234,7 +233,7 @@ public class tela1 extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jComboBoxMesSaida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jComboBoxAnoSaida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(440, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Saídas", jPanel2);
@@ -328,20 +327,50 @@ public class tela1 extends javax.swing.JFrame {
                 
         double validaValorEntrada = Double.parseDouble(jTextFieldValorEntrada.getText());
         
-       
         if(jTextFieldValorEntrada.getText().equals("") || validaValorEntrada <= 0){
             JOptionPane.showMessageDialog(this,
-                    "Valor de entrada invalido!",
+                    "Valor de entrada invalido!" ,
+                    "Entrada",
+                    JOptionPane.ERROR_MESSAGE);
+        }else if(jTextFieldDataEntrada.getText().equals("")){
+            JOptionPane.showMessageDialog(this,
+                    "Data invalida!!" ,
                     "Entrada",
                     JOptionPane.ERROR_MESSAGE);
         }else{
-            controleEntrada.SalvarEntrada(validaValorEntrada, (Date)jFormattedTextFieldDataEntrada.getValue());
+            controleEntrada.SalvarEntrada(validaValorEntrada, jTextFieldDataEntrada.getText(), jComboBoxContaEntrada.getSelectedItem());
+            JOptionPane.showMessageDialog(this,
+                    "Entrada adicionada com sucesso!" ,
+                    "Entrada",
+                    JOptionPane.INFORMATION_MESSAGE);
         }
+            
+            
+        
         
     }//GEN-LAST:event_jButtonConfirmarEntradaActionPerformed
 
     private void jButtonConfirmarSaidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirmarSaidaActionPerformed
+       
+        double validaValorSaida = Double.parseDouble(jTextFieldValorEntrada.getText());
         
+        if(jTextFieldValorSaida.getText().equals("") || validaValorSaida <= 0){
+            JOptionPane.showMessageDialog(this,
+                    "Valor de saida invalido!" ,
+                    "Saida",
+                    JOptionPane.ERROR_MESSAGE);
+        }else if(jTextFieldDataSaida.getText().equals("")){
+            JOptionPane.showMessageDialog(this,
+                    "Data invalida!!" ,
+                    "Saida",
+                    JOptionPane.ERROR_MESSAGE);
+        }else{
+            controleSaida.SalvarSaida(validaValorSaida, jTextFieldDataSaida.getText(), jComboBoxContaSaida.getSelectedItem());
+            JOptionPane.showMessageDialog(this,
+                    "Saida adicionada com sucesso!" ,
+                    "Saida",
+                    JOptionPane.INFORMATION_MESSAGE);
+        }
     }//GEN-LAST:event_jButtonConfirmarSaidaActionPerformed
 
     /**
@@ -389,8 +418,6 @@ public class tela1 extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> jComboBoxContaSaida;
     private javax.swing.JComboBox<String> jComboBoxMesEntrada;
     private javax.swing.JComboBox<String> jComboBoxMesSaida;
-    private javax.swing.JFormattedTextField jFormattedTextFieldDataEntrada;
-    private javax.swing.JFormattedTextField jFormattedTextFieldDataSaida;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
@@ -407,6 +434,8 @@ public class tela1 extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JTextField jTextFieldDataEntrada;
+    private javax.swing.JTextField jTextFieldDataSaida;
     private javax.swing.JTextField jTextFieldNomeConta;
     private javax.swing.JTextField jTextFieldValorEntrada;
     private javax.swing.JTextField jTextFieldValorInicial;

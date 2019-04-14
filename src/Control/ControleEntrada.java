@@ -5,7 +5,7 @@
  */
 package Control;
 
-import 
+import Model.Conta;
 import java.awt.List;
 import java.util.ArrayList;
 import java.util.Date;
@@ -17,12 +17,25 @@ import java.util.Date;
  */
 public class ControleEntrada {
     
-    public void SalvarEntrada(double valor, Date data){
-         //addEntrada(valor,data);
+    
+    
+    public void SalvarEntrada(double valor, String data, Object conta){
+         //addEntrada(valor,data,conta);
     }
     
+    /*
     public List<String> BuscarConta(){
-        List<Conta> contas = new ArrayList<Conta>;
+        ArrayList<String> nomesContas = new ArrayList<String>();
+        ArrayList<Conta> contas = new ArrayList<Conta>();
+        contas = database.getContas();
         
+        for(Conta x : contas){
+            String nome;
+            nome = x.getNome();
+            nomesContas.add(nome);
+        }
+        
+        return nomesContas;
     }
+*/
 }
