@@ -5,11 +5,22 @@
  */
 package View;
 
+
+import javax.swing.JOptionPane;
+
+import Control.ControleConta;
+import Control.ControleEntrada;
+import java.time.LocalDateTime;
+import java.util.Date;
+
 /**
  *
  * @author Aluno
  */
 public class tela1 extends javax.swing.JFrame {
+    
+    ControleConta controleConta = new ControleConta();
+    ControleEntrada controleEntrada = new ControleEntrada();
 
     /**
      * Creates new form tela1
@@ -56,18 +67,15 @@ public class tela1 extends javax.swing.JFrame {
         jLabel18 = new javax.swing.JLabel();
         jTextFieldNomeConta = new javax.swing.JTextField();
         jLabel19 = new javax.swing.JLabel();
-        jFormattedTextFieldValorInicial = new javax.swing.JFormattedTextField();
         jButtonConfirmarConta = new javax.swing.JButton();
+        jTextFieldValorInicial = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setText("Valor");
+        jTabbedPane1.setMinimumSize(new java.awt.Dimension(800, 600));
+        jTabbedPane1.setName(""); // NOI18N
 
-        jTextFieldValorEntrada.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldValorEntradaActionPerformed(evt);
-            }
-        });
+        jLabel1.setText("Valor");
 
         jLabel2.setText("Data");
 
@@ -86,6 +94,11 @@ public class tela1 extends javax.swing.JFrame {
         jLabelAnoEntrada.setText("Ano");
 
         jButtonConfirmarEntrada.setText("Confirmar");
+        jButtonConfirmarEntrada.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonConfirmarEntradaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -146,12 +159,6 @@ public class tela1 extends javax.swing.JFrame {
 
         jLabel13.setText("Valor");
 
-        jTextFieldValorSaida.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldValorSaidaActionPerformed(evt);
-            }
-        });
-
         jLabel14.setText("Data");
 
         jFormattedTextFieldDataSaida.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter()));
@@ -169,6 +176,11 @@ public class tela1 extends javax.swing.JFrame {
         jLabel17.setText("Ano");
 
         jButtonConfirmarSaida.setText("Confirmar");
+        jButtonConfirmarSaida.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonConfirmarSaidaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -181,8 +193,8 @@ public class tela1 extends javax.swing.JFrame {
                     .addComponent(jLabel13))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jFormattedTextFieldDataSaida, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel14))
+                    .addComponent(jLabel14)
+                    .addComponent(jFormattedTextFieldDataSaida, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel15)
@@ -198,7 +210,7 @@ public class tela1 extends javax.swing.JFrame {
                         .addComponent(jComboBoxContaSaida, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButtonConfirmarSaida)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(352, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -229,17 +241,14 @@ public class tela1 extends javax.swing.JFrame {
 
         jLabel18.setText("Nome");
 
-        jTextFieldNomeConta.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldNomeContaActionPerformed(evt);
-            }
-        });
-
         jLabel19.setText("Valor Inicial");
 
-        jFormattedTextFieldValorInicial.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter()));
-
         jButtonConfirmarConta.setText("Confirmar");
+        jButtonConfirmarConta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonConfirmarContaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -252,11 +261,11 @@ public class tela1 extends javax.swing.JFrame {
                     .addComponent(jLabel18))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jFormattedTextFieldValorInicial, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel19))
+                    .addComponent(jLabel19)
+                    .addComponent(jTextFieldValorInicial, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jButtonConfirmarConta)
-                .addContainerGap(126, Short.MAX_VALUE))
+                .addContainerGap(468, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -268,9 +277,9 @@ public class tela1 extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextFieldNomeConta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jFormattedTextFieldValorInicial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonConfirmarConta))
-                .addContainerGap(73, Short.MAX_VALUE))
+                    .addComponent(jButtonConfirmarConta)
+                    .addComponent(jTextFieldValorInicial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(502, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Contas", jPanel3);
@@ -281,31 +290,59 @@ public class tela1 extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(23, 23, 23)
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 800, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(277, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 600, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(237, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextFieldValorEntradaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldValorEntradaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldValorEntradaActionPerformed
+    private void jButtonConfirmarContaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirmarContaActionPerformed
+        
+        double validaInicial = Double.parseDouble(jTextFieldValorInicial.getText());
+        
+        if(jTextFieldNomeConta.getText().equals("")){
+            JOptionPane.showMessageDialog(this,
+                    "Nome de conta invalido!!",
+                    "Criar Conta",
+                    JOptionPane.ERROR_MESSAGE);
+        }else if(validaInicial < 0){
+            JOptionPane.showMessageDialog(this,
+                    "Valor inicial invalido!!",
+                    "Criar Conta",
+                    JOptionPane.ERROR_MESSAGE);
+        }else {
+            controleConta.SalvarConta(jTextFieldNomeConta.getText(), validaInicial);
+        }
+            
+    }//GEN-LAST:event_jButtonConfirmarContaActionPerformed
 
-    private void jTextFieldValorSaidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldValorSaidaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldValorSaidaActionPerformed
+    private void jButtonConfirmarEntradaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirmarEntradaActionPerformed
+                
+        double validaValorEntrada = Double.parseDouble(jTextFieldValorEntrada.getText());
+        
+       
+        if(jTextFieldValorEntrada.getText().equals("") || validaValorEntrada <= 0){
+            JOptionPane.showMessageDialog(this,
+                    "Valor de entrada invalido!",
+                    "Entrada",
+                    JOptionPane.ERROR_MESSAGE);
+        }else{
+            controleEntrada.SalvarEntrada(validaValorEntrada, (Date)jFormattedTextFieldDataEntrada.getValue());
+        }
+        
+    }//GEN-LAST:event_jButtonConfirmarEntradaActionPerformed
 
-    private void jTextFieldNomeContaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldNomeContaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldNomeContaActionPerformed
+    private void jButtonConfirmarSaidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirmarSaidaActionPerformed
+        
+    }//GEN-LAST:event_jButtonConfirmarSaidaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -354,7 +391,6 @@ public class tela1 extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> jComboBoxMesSaida;
     private javax.swing.JFormattedTextField jFormattedTextFieldDataEntrada;
     private javax.swing.JFormattedTextField jFormattedTextFieldDataSaida;
-    private javax.swing.JFormattedTextField jFormattedTextFieldValorInicial;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
@@ -373,6 +409,7 @@ public class tela1 extends javax.swing.JFrame {
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTextField jTextFieldNomeConta;
     private javax.swing.JTextField jTextFieldValorEntrada;
+    private javax.swing.JTextField jTextFieldValorInicial;
     private javax.swing.JTextField jTextFieldValorSaida;
     // End of variables declaration//GEN-END:variables
 }
