@@ -22,16 +22,17 @@ public class ControleEntrada {
     LocalDatabase localDataBase = new LocalDatabase();
     
     public void SalvarEntrada(double valor, String data, Object conta){
-        Conta c = (Conta) conta;
+        
+        Conta c = localDataBase.getConta((String) conta);
         Entrada entrada = new Entrada(data,c,valor);
         localDataBase.addEntrada(entrada);
     }
     
-    /*
-    public List<String> BuscarConta(){
+    
+    public ArrayList<String> BuscarConta(){
         ArrayList<String> nomesContas = new ArrayList<String>();
         ArrayList<Conta> contas = new ArrayList<Conta>();
-        contas = database.getContas();
+        contas = localDataBase.getContas();
         
         for(Conta x : contas){
             String nome;
@@ -41,5 +42,5 @@ public class ControleEntrada {
         
         return nomesContas;
     }
-*/
+
 }

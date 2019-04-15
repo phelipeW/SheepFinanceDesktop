@@ -33,11 +33,7 @@ public class tela1 extends javax.swing.JFrame {
      */
     public tela1() {
         initComponents();
-        try{
-        jComboBoxContaEntrada.setModel(new DefaultComboBoxModel(controleConta.getContas().toArray()));
-        } catch (Exception ex){
-            
-        }
+        
     }
 
     /**
@@ -90,9 +86,10 @@ public class tela1 extends javax.swing.JFrame {
 
         jLabel2.setText("Data");
 
-        jComboBoxContaEntrada.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBoxContaEntradaActionPerformed(evt);
+        jComboBoxContaEntrada.setModel(jComboBoxContaEntrada.getModel());
+        jComboBoxContaEntrada.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jComboBoxContaEntradaMouseClicked(evt);
             }
         });
 
@@ -174,7 +171,11 @@ public class tela1 extends javax.swing.JFrame {
 
         jLabel14.setText("Data");
 
-        jComboBoxContaSaida.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBoxContaSaida.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jComboBoxContaSaidaMouseClicked(evt);
+            }
+        });
 
         jLabel15.setText("Conta");
 
@@ -315,32 +316,6 @@ public class tela1 extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButtonConfirmarContaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirmarContaActionPerformed
-        
-        double validaInicial = Double.parseDouble(jTextFieldValorInicial.getText());
-        
-        if(jTextFieldNomeConta.getText().equals("")){
-            JOptionPane.showMessageDialog(this,
-                    "Nome de conta invalido!!",
-                    "Criar Conta",
-                    JOptionPane.ERROR_MESSAGE);
-        }else if(validaInicial < 0){
-            JOptionPane.showMessageDialog(this,
-                    "Valor inicial invalido!!",
-                    "Criar Conta",
-                    JOptionPane.ERROR_MESSAGE);
-        }else {
-            
-            controleConta.SalvarConta(jTextFieldNomeConta.getText(), validaInicial);
-            JOptionPane.showMessageDialog(this,
-                    "Conta adicionada com sucesso",
-                    "Criar Conta",
-                    JOptionPane.INFORMATION_MESSAGE);
-            
-        }
-            
-    }//GEN-LAST:event_jButtonConfirmarContaActionPerformed
-
     private void jButtonConfirmarEntradaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirmarEntradaActionPerformed
                 
         double validaValorEntrada = Double.parseDouble(jTextFieldValorEntrada.getText());
@@ -370,7 +345,7 @@ public class tela1 extends javax.swing.JFrame {
 
     private void jButtonConfirmarSaidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirmarSaidaActionPerformed
        
-        double validaValorSaida = Double.parseDouble(jTextFieldValorEntrada.getText());
+        double validaValorSaida = Double.parseDouble(jTextFieldValorSaida.getText());
         
         if(jTextFieldValorSaida.getText().equals("") || validaValorSaida <= 0){
             JOptionPane.showMessageDialog(this,
@@ -391,9 +366,36 @@ public class tela1 extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButtonConfirmarSaidaActionPerformed
 
-    private void jComboBoxContaEntradaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxContaEntradaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBoxContaEntradaActionPerformed
+    private void jComboBoxContaEntradaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jComboBoxContaEntradaMouseClicked
+        jComboBoxContaEntrada.setModel(new DefaultComboBoxModel(controleEntrada.BuscarConta().toArray()));
+    }//GEN-LAST:event_jComboBoxContaEntradaMouseClicked
+
+    private void jButtonConfirmarContaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirmarContaActionPerformed
+        
+        double validaValorInicial = Double.parseDouble(jTextFieldValorInicial.getText());
+        
+        if(jTextFieldNomeConta.getText().equals("")){
+            JOptionPane.showMessageDialog(this,
+                    "Nome invalido!" ,
+                    "Conta",
+                    JOptionPane.ERROR_MESSAGE);
+        }else if(validaValorInicial <= 0){
+            JOptionPane.showMessageDialog(this,
+                    "Valor invalido!!!!" ,
+                    "Conta",
+                    JOptionPane.ERROR_MESSAGE);
+        }else{
+            controleConta.SalvarConta(jTextFieldNomeConta.getText(),validaValorInicial);
+            JOptionPane.showMessageDialog(this,
+                    "Conta adicionada com sucesso!" + controleConta.getContas().get(0).getNome() ,
+                    "Conta",
+                    JOptionPane.INFORMATION_MESSAGE);
+        }
+    }//GEN-LAST:event_jButtonConfirmarContaActionPerformed
+
+    private void jComboBoxContaSaidaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jComboBoxContaSaidaMouseClicked
+        jComboBoxContaSaida.setModel(new DefaultComboBoxModel(controleSaida.BuscarConta().toArray()));
+    }//GEN-LAST:event_jComboBoxContaSaidaMouseClicked
 
     /**
      * @param args the command line arguments
