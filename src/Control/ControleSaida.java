@@ -20,11 +20,12 @@ public class ControleSaida {
     public void SalvarSaida(double valor, String data, Object conta){
         
         Conta c = localDataBase.getConta((String) conta);
+        c.Debto(valor);
         Saida s = new Saida(data,c,valor);
         localDataBase.addSaida(s);
     }
     
-    public ArrayList<String> BuscarConta(){
+    public ArrayList<String> BuscarNomeConta(){
         ArrayList<String> nomesContas = new ArrayList<String>();
         ArrayList<Conta> contas = new ArrayList<Conta>();
         contas = localDataBase.getContas();

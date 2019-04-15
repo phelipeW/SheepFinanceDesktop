@@ -7,12 +7,12 @@ package View;
 
 
 import javax.swing.JOptionPane;
-
-
 import Control.ControleConta;
 import Control.ControleEntrada;
 import Control.ControleSaida;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.table.DefaultTableModel;
+import Model.Conta;
 
 
 
@@ -26,6 +26,17 @@ public class tela1 extends javax.swing.JFrame {
     ControleEntrada controleEntrada = new ControleEntrada();
     ControleSaida controleSaida = new ControleSaida();
     
+    public void adicionaLinhaTabela(){
+        DefaultTableModel model = (DefaultTableModel) jTableEntrada.getModel();
+        Object rowData[] = new Object[2];
+        for(int i = model.getRowCount(); i<controleEntrada.BuscarContas().size() ;i++){
+            rowData[0] = controleEntrada.BuscarContas().get(i).getNome();
+            rowData[1] = controleEntrada.BuscarContas().get(i).getSaldo();
+            model.addRow(rowData);
+        }
+        
+        
+    }
     
 
     /**
@@ -76,8 +87,15 @@ public class tela1 extends javax.swing.JFrame {
         jLabel19 = new javax.swing.JLabel();
         jButtonConfirmarConta = new javax.swing.JButton();
         jTextFieldValorInicial = new javax.swing.JTextField();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTableEntrada = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         jTabbedPane1.setMinimumSize(new java.awt.Dimension(800, 600));
         jTabbedPane1.setName(""); // NOI18N
@@ -262,6 +280,24 @@ public class tela1 extends javax.swing.JFrame {
             }
         });
 
+        jTableEntrada.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Conta", "Saldo"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane2.setViewportView(jTableEntrada);
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -278,6 +314,9 @@ public class tela1 extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jButtonConfirmarConta)
                 .addContainerGap(468, Short.MAX_VALUE))
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -291,7 +330,9 @@ public class tela1 extends javax.swing.JFrame {
                     .addComponent(jTextFieldNomeConta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonConfirmarConta)
                     .addComponent(jTextFieldValorInicial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(502, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(25, 25, 25))
         );
 
         jTabbedPane1.addTab("Contas", jPanel3);
@@ -331,6 +372,7 @@ public class tela1 extends javax.swing.JFrame {
                     "Entrada",
                     JOptionPane.ERROR_MESSAGE);
         }else{
+            adicionaLinhaTabela();
             controleEntrada.SalvarEntrada(validaValorEntrada, jTextFieldDataEntrada.getText(), jComboBoxContaEntrada.getSelectedItem());
             JOptionPane.showMessageDialog(this,
                     "Entrada adicionada com sucesso!" ,
@@ -358,6 +400,7 @@ public class tela1 extends javax.swing.JFrame {
                     "Saida",
                     JOptionPane.ERROR_MESSAGE);
         }else{
+            
             controleSaida.SalvarSaida(validaValorSaida, jTextFieldDataSaida.getText(), jComboBoxContaSaida.getSelectedItem());
             JOptionPane.showMessageDialog(this,
                     "Saida adicionada com sucesso!" ,
@@ -367,7 +410,7 @@ public class tela1 extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonConfirmarSaidaActionPerformed
 
     private void jComboBoxContaEntradaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jComboBoxContaEntradaMouseClicked
-        jComboBoxContaEntrada.setModel(new DefaultComboBoxModel(controleEntrada.BuscarConta().toArray()));
+        jComboBoxContaEntrada.setModel(new DefaultComboBoxModel(controleEntrada.BuscarNomeContas().toArray()));
     }//GEN-LAST:event_jComboBoxContaEntradaMouseClicked
 
     private void jButtonConfirmarContaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirmarContaActionPerformed
@@ -387,15 +430,27 @@ public class tela1 extends javax.swing.JFrame {
         }else{
             controleConta.SalvarConta(jTextFieldNomeConta.getText(),validaValorInicial);
             JOptionPane.showMessageDialog(this,
-                    "Conta adicionada com sucesso!" + controleConta.getContas().get(0).getNome() ,
+                    "Conta adicionada com sucesso!" ,
                     "Conta",
                     JOptionPane.INFORMATION_MESSAGE);
+            jComboBoxContaSaida.setModel(new DefaultComboBoxModel(controleSaida.BuscarNomeConta().toArray()));
+            jComboBoxContaEntrada.setModel(new DefaultComboBoxModel(controleEntrada.BuscarNomeContas().toArray()));
+            jTableEntrada.removeAll();
+            adicionaLinhaTabela();
         }
     }//GEN-LAST:event_jButtonConfirmarContaActionPerformed
 
     private void jComboBoxContaSaidaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jComboBoxContaSaidaMouseClicked
-        jComboBoxContaSaida.setModel(new DefaultComboBoxModel(controleSaida.BuscarConta().toArray()));
+        jComboBoxContaSaida.setModel(new DefaultComboBoxModel(controleSaida.BuscarNomeConta().toArray()));
     }//GEN-LAST:event_jComboBoxContaSaidaMouseClicked
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        jComboBoxContaSaida.setModel(new DefaultComboBoxModel(controleSaida.BuscarNomeConta().toArray()));
+        jComboBoxContaEntrada.setModel(new DefaultComboBoxModel(controleEntrada.BuscarNomeContas().toArray()));
+        adicionaLinhaTabela();
+               
+       
+    }//GEN-LAST:event_formWindowOpened
 
     /**
      * @param args the command line arguments
@@ -457,7 +512,9 @@ public class tela1 extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JTable jTableEntrada;
     private javax.swing.JTextField jTextFieldDataEntrada;
     private javax.swing.JTextField jTextFieldDataSaida;
     private javax.swing.JTextField jTextFieldNomeConta;

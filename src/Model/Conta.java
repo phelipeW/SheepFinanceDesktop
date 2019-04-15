@@ -28,11 +28,11 @@ public class Conta implements Serializable {
         return Saldo;
     }
 
-    void Credito(Double valor) {
+    public void Credito(Double valor) {
         Saldo += valor;
     }
 
-    void Debto(Double valor) {
+    public void Debto(Double valor) {
         Saldo -= valor;
     }
 }

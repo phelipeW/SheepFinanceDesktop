@@ -24,12 +24,13 @@ public class ControleEntrada {
     public void SalvarEntrada(double valor, String data, Object conta){
         
         Conta c = localDataBase.getConta((String) conta);
+        c.Credito(valor);
         Entrada entrada = new Entrada(data,c,valor);
         localDataBase.addEntrada(entrada);
     }
     
     
-    public ArrayList<String> BuscarConta(){
+    public ArrayList<String> BuscarNomeContas(){
         ArrayList<String> nomesContas = new ArrayList<String>();
         ArrayList<Conta> contas = new ArrayList<Conta>();
         contas = localDataBase.getContas();
@@ -42,5 +43,14 @@ public class ControleEntrada {
         
         return nomesContas;
     }
+    
+    public ArrayList<Conta> BuscarContas(){
+        ArrayList<Conta> contas = new ArrayList<Conta>();
+        contas = localDataBase.getContas();
+                
+        return contas;
+    }
+    
+    
 
 }
