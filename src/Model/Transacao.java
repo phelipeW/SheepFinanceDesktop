@@ -17,4 +17,7 @@ public abstract class Transacao {
     public String Data;
 
     public abstract void Movimentar(Double value);
+    public abstract String getDescricao();
+    public abstract Double getValor();
+    public abstract String getData();
 }

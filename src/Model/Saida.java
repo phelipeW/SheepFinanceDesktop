@@ -24,6 +24,21 @@ public class Saida extends Transacao implements Serializable {
     
     @Override
     public void Movimentar(Double valor) {
-        Conta.Debto(valor);
+        Conta.Credito(valor);
+    }    
+
+    @Override
+    public String getDescricao() {
+        return super.Descricao;
+    }
+
+    @Override
+    public Double getValor() {
+        return super.Valor;
+    }
+
+    @Override
+    public String getData() {
+        return super.Data;
     }
 }
