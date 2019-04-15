@@ -5,13 +5,14 @@
  */
 package Model;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  *
  * @author abelo
  */
-public class Entrada extends Transacao {
+public class Entrada extends Transacao implements Serializable {
     public Conta Conta;
     
     public Entrada(Date data, Conta conta, Double valor){

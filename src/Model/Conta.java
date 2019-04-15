@@ -5,11 +5,13 @@
  */
 package Model;
 
+import java.io.Serializable;
+
 /**
  *
  * @author abelo
  */
-public class Conta {
+public class Conta implements Serializable {
     private String Nome;   
     private Double Saldo;
     
