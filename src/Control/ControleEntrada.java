@@ -19,7 +19,7 @@ import java.util.Date;
  */
 public class ControleEntrada {
     
-    LocalDatabase localDataBase = new LocalDatabase();
+    LocalDatabase localDataBase = LocalDatabase.GetInstance();
     
     public void SalvarEntrada(double valor, String data, Object conta){
         

@@ -13,7 +13,7 @@ import java.util.ArrayList;
  */
 public class ControleConta {
     
-    LocalDatabase localDataBase = new LocalDatabase();
+    LocalDatabase localDataBase = LocalDatabase.GetInstance();
     
     public void SalvarConta(String nome, double valorInicial ){
         Conta c = new Conta(nome,valorInicial);

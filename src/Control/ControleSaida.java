@@ -15,7 +15,7 @@ import java.util.ArrayList;
  */
 public class ControleSaida {
     
-    LocalDatabase localDataBase = new LocalDatabase();
+    LocalDatabase localDataBase = LocalDatabase.GetInstance();
     
     public void SalvarSaida(double valor, String data, Object conta){
         
