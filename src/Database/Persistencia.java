@@ -5,69 +5,60 @@
  */
 package Database;
 
+import Model.Conta;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.util.ArrayList;
 
 /**
  *
  * @author abelo
  */
 public class Persistencia {
-    private File arquivo;
-
-    public Persistencia(File arq) {
-        arquivo = arq;
+    public Persistencia() {
+        
     }
-
-    public boolean Escreve(String aux, boolean append) {
-        boolean r = false;
+    
+    public void Escreve(Object object, String arquivo){
         try {
-            BufferedWriter escritabuffer
-                    = new BufferedWriter(new FileWriter(
-                            getArquivo(), append));
-            escritabuffer.write(aux + "\n");
-            escritabuffer.flush();
-            escritabuffer.close();
-            r = true;
-        } catch (IOException erro) {
-            System.err.println("Erro de escrita");
-        } finally {
-            return r;
+            FileOutputStream fout = new FileOutputStream(arquivo);
+            ObjectOutputStream oos = new ObjectOutputStream(fout);
+            oos.writeObject(object);
+
+            oos.close();
+            System.out.println("Done");
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
-
-    public String Le() {
-        StringBuffer aux = new StringBuffer();
+    
+    public Object Le(String arquivo){
+        Object object;        
         try {
-            FileReader leitor = new FileReader(getArquivo());
-            BufferedReader leitorbuffer = new BufferedReader(leitor);
-            while (leitorbuffer.ready()) {
-                aux.append(leitorbuffer.readLine()).append("\n");
-            }
-            leitorbuffer.close();
+            FileInputStream fin = new FileInputStream(arquivo);
+            ObjectInputStream ois = new ObjectInputStream(fin);
+            object = ois.readObject();
+            ois.close();
 
-        } catch (IOException erro) {
-            System.err.println("Erro ao ler arquivo. " + erro);
-        } finally {
-            return aux.toString();
+            return object;
+            
+        } 
+        catch (FileNotFoundException e){
+            Escreve("", arquivo);
+            return "";
         }
-    }
-
-    /**
-     * @return the arquivo
-     */
-    private File getArquivo() {
-        return arquivo;
-    }
-
-    /**
-     * @param arquivo the arquivo to set
-     */
-    private void setArquivo(File arquivo) {
-        this.arquivo = arquivo;
+        catch (Exception e) {
+            e.printStackTrace();
+            return "";
+        }
     }
 }
