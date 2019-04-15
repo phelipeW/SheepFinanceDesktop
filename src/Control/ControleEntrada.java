@@ -5,7 +5,9 @@
  */
 package Control;
 
+import Database.LocalDatabase;
 import Model.Conta;
+import Model.Entrada;
 import java.awt.List;
 import java.util.ArrayList;
 import java.util.Date;
@@ -17,10 +19,12 @@ import java.util.Date;
  */
 public class ControleEntrada {
     
-    
+    LocalDatabase localDataBase = new LocalDatabase();
     
     public void SalvarEntrada(double valor, String data, Object conta){
-         //addEntrada(valor,data,conta);
+        Conta c = (Conta) conta;
+        Entrada entrada = new Entrada(data,c,valor);
+        localDataBase.addEntrada(entrada);
     }
     
     /*

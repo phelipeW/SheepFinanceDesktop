@@ -5,13 +5,21 @@
  */
 package Control;
 
+import Database.LocalDatabase;
+import Model.Saida;
+import Model.Conta;
 /**
  *
  * @author pheli
  */
 public class ControleSaida {
     
+    LocalDatabase localDataBase = new LocalDatabase();
+    
     public void SalvarSaida(double valor, String data, Object conta){
-         //addEntrada(valor,data,conta);
+        
+        Conta c = (Conta) conta;
+        Saida s = new Saida(data,c,valor);
+        localDataBase.addSaida(s);
     }
 }

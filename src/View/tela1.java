@@ -8,12 +8,13 @@ package View;
 
 import javax.swing.JOptionPane;
 
+
 import Control.ControleConta;
 import Control.ControleEntrada;
 import Control.ControleSaida;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.Date;
+import javax.swing.DefaultComboBoxModel;
+
+
 
 /**
  *
@@ -24,12 +25,19 @@ public class tela1 extends javax.swing.JFrame {
     ControleConta controleConta = new ControleConta();
     ControleEntrada controleEntrada = new ControleEntrada();
     ControleSaida controleSaida = new ControleSaida();
+    
+    
 
     /**
      * Creates new form tela1
      */
     public tela1() {
         initComponents();
+        try{
+        jComboBoxContaEntrada.setModel(new DefaultComboBoxModel(controleConta.getContas().toArray()));
+        } catch (Exception ex){
+            
+        }
     }
 
     /**
@@ -82,7 +90,11 @@ public class tela1 extends javax.swing.JFrame {
 
         jLabel2.setText("Data");
 
-        jComboBoxContaEntrada.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBoxContaEntrada.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxContaEntradaActionPerformed(evt);
+            }
+        });
 
         jLabel3.setText("Conta");
 
@@ -318,7 +330,13 @@ public class tela1 extends javax.swing.JFrame {
                     "Criar Conta",
                     JOptionPane.ERROR_MESSAGE);
         }else {
+            
             controleConta.SalvarConta(jTextFieldNomeConta.getText(), validaInicial);
+            JOptionPane.showMessageDialog(this,
+                    "Conta adicionada com sucesso",
+                    "Criar Conta",
+                    JOptionPane.INFORMATION_MESSAGE);
+            
         }
             
     }//GEN-LAST:event_jButtonConfirmarContaActionPerformed
@@ -372,6 +390,10 @@ public class tela1 extends javax.swing.JFrame {
                     JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_jButtonConfirmarSaidaActionPerformed
+
+    private void jComboBoxContaEntradaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxContaEntradaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBoxContaEntradaActionPerformed
 
     /**
      * @param args the command line arguments
