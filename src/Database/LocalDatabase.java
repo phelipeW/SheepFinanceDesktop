@@ -76,7 +76,7 @@ public class LocalDatabase {
     
     public void addEntrada(Entrada entrada){
         Entradas.add(entrada);
-        //bd.Escreve(getEntradas(), "entradas.txt");
+        bd.EscreveEntrada(getEntradas(), "entradas.txt");
     }
         
     public void deleteEntrada(Entrada entrada){
@@ -89,7 +89,7 @@ public class LocalDatabase {
     
     public void addSaida(Saida saida){
         Saidas.add(saida);
-        //bd.Escreve(getSaidas(), "saidas.txt");
+        bd.EscreveSaida(getSaidas(), "saidas.txt");
     }
     
     public void deleteSaida(Saida saida){

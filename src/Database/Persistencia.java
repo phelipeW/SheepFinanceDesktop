@@ -9,20 +9,15 @@ import Model.Conta;
 import Model.Entrada;
 import Model.Saida;
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
+
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+
 import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+
 import java.util.ArrayList;
-import jdk.nashorn.internal.objects.Global;
-import jdk.nashorn.internal.parser.JSONParser;
 
 /**
  *
@@ -41,6 +36,28 @@ public class Persistencia {
             //oos.writeObject(object);
 
             //oos.close();
+            System.out.println("Done");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public void EscreveEntrada(ArrayList<Entrada> entradas, String arquivo){
+        try {
+            FileOutputStream fout = new FileOutputStream(arquivo);
+            fout.write(getObjectEntradas(entradas).getBytes());
+            
+            System.out.println("Done");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public void EscreveSaida(ArrayList<Saida> saidas, String arquivo){
+        try {
+            FileOutputStream fout = new FileOutputStream(arquivo);
+            fout.write(getObjectSaidas(saidas).getBytes());
+            
             System.out.println("Done");
         } catch (Exception e) {
             e.printStackTrace();
@@ -75,12 +92,17 @@ public class Persistencia {
     }
 
     ArrayList<Entrada> LeEntradas(String arquivo) {
-        ArrayList<Entrada> object;        
+        ArrayList<Entrada> object;   
+        String line = null;
+        StringBuilder json = new StringBuilder();
         try {
             FileInputStream fin = new FileInputStream(arquivo);
-            ObjectInputStream ois = new ObjectInputStream(fin);
-            object = (ArrayList<Entrada>)ois.readObject();
-            ois.close();
+            BufferedReader in = new BufferedReader(new InputStreamReader(fin));
+            while((line = in.readLine()) != null) {
+                json.append(line);
+            }
+            
+            object = readObjectEntradas(json.toString());
 
             return object;
         } 
@@ -95,11 +117,16 @@ public class Persistencia {
 
     ArrayList<Saida> LeSaidas(String arquivo) {
         ArrayList<Saida> object;        
+       String line = null;
+        StringBuilder json = new StringBuilder();
         try {
             FileInputStream fin = new FileInputStream(arquivo);
-            ObjectInputStream ois = new ObjectInputStream(fin);
-            object = (ArrayList<Saida>)ois.readObject();
-            ois.close();
+            BufferedReader in = new BufferedReader(new InputStreamReader(fin));
+            while((line = in.readLine()) != null) {
+                json.append(line);
+            }
+            
+            object = readObjectSaidas(json.toString());
 
             return object;
         } 
@@ -127,6 +154,40 @@ public class Persistencia {
         return retorno.toString();
     }
     
+    private String getObjectEntradas(ArrayList<Entrada> entradas) {
+        StringBuilder retorno = new StringBuilder();
+        retorno.append("[");
+        for (Entrada entrada : entradas) {
+            retorno.append("{");
+            retorno.append("'data':'");
+            retorno.append(entrada.getData());
+            retorno.append("','conta':'");
+            retorno.append(entrada.getDescricao());
+            retorno.append("','valor':");
+            retorno.append(entrada.getValor());
+            retorno.append("},");
+        }
+        retorno.append("]");
+        return retorno.toString();
+    }
+    
+    private String getObjectSaidas(ArrayList<Saida> saidas) {
+        StringBuilder retorno = new StringBuilder();
+        retorno.append("[");
+        for (Saida saida : saidas) {
+            retorno.append("{");
+            retorno.append("'data':'");
+            retorno.append(saida.getData());
+            retorno.append("','conta':'");
+            retorno.append(saida.getDescricao());
+            retorno.append("','valor':");
+            retorno.append(saida.getValor());
+            retorno.append("},");
+        }
+        retorno.append("]");
+        return retorno.toString();
+    }
+    
     private ArrayList<Conta> readObjectContas(String json) {
         String[] lista = json.split("},");
         ArrayList<Conta> contas = new ArrayList();
@@ -143,5 +204,43 @@ public class Persistencia {
         }
         
         return contas;
+    }
+    
+    private ArrayList<Entrada> readObjectEntradas(String json) {
+        String[] lista = json.split("},");
+        ArrayList<Entrada> entradas = new ArrayList();
+        
+        for (String item : lista) {
+            if(item.length() > 14)
+            {
+                String data = item.substring(item.indexOf("data':'")+"data':'".length(), item.indexOf("','conta"));
+                Conta conta = LocalDatabase.GetInstance().getConta(item.substring(item.indexOf("conta':'")+"conta':'".length(), item.indexOf("','valor")));
+                Double valor = Double.parseDouble(item.substring(item.indexOf("valor':")+"valor':".length()));
+                Entrada entrada = new Entrada(data, conta, valor);
+
+                entradas.add(entrada);
+            }
+        }
+        
+        return entradas;
+    }
+    
+    private ArrayList<Saida> readObjectSaidas(String json) {
+        String[] lista = json.split("},");
+        ArrayList<Saida> saidas = new ArrayList();
+        
+        for (String item : lista) {
+            if(item.length() > 14)
+            {
+                String data = item.substring(item.indexOf("data':'")+"data':'".length(), item.indexOf("','conta"));
+                Conta conta = LocalDatabase.GetInstance().getConta(item.substring(item.indexOf("conta':'")+"conta':'".length(), item.indexOf("','valor")));
+                Double valor = Double.parseDouble(item.substring(item.indexOf("valor':")+"valor':".length()));
+                Saida saida = new Saida(data, conta, valor);
+
+                saidas.add(saida);
+            }
+        }
+        
+        return saidas;
     }
 }
