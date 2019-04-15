@@ -16,16 +16,36 @@ import java.util.Date;
  * @author abelo
  */
 public class LocalDatabase {
-    Persistencia bd = new Persistencia();
+    
+    private static LocalDatabase instancia;
+    
+    private static Persistencia bd;
     
     private static ArrayList<Conta> Contas;
     private static ArrayList<Entrada> Entradas;
     private static ArrayList<Saida> Saidas;
+ 
+    private LocalDatabase(){}
     
-    public LocalDatabase(){
-        Contas = (ArrayList<Conta>)bd.Le("contas.txt");
-        Entradas = (ArrayList<Entrada>)bd.Le("entradas.txt");
-        Saidas = (ArrayList<Saida>)bd.Le("entradas.txt");
+    public static LocalDatabase GetInstance(){
+        if(instancia == null)
+        {
+            bd = new Persistencia();
+            instancia = new LocalDatabase();
+            
+            Contas = bd.LeContas("contas.txt");
+            Entradas = bd.LeEntradas("entradas.txt");
+            Saidas = bd.LeSaidas("saidas.txt");
+
+            if(Contas == null)
+                Contas = new ArrayList<>();        
+            if(Entradas == null)
+                Entradas = new ArrayList<>();
+            if(Saidas == null)
+                Saidas = new ArrayList<>();
+        }
+        
+        return instancia;
     }
     
     public ArrayList<Conta> getContas(){

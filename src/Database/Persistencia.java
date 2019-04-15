@@ -6,6 +6,8 @@
 package Database;
 
 import Model.Conta;
+import Model.Entrada;
+import Model.Saida;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -41,24 +43,60 @@ public class Persistencia {
         }
     }
     
-    public Object Le(String arquivo){
-        Object object;        
+    public ArrayList<Conta> LeContas(String arquivo){
+        ArrayList<Conta> object;        
         try {
             FileInputStream fin = new FileInputStream(arquivo);
             ObjectInputStream ois = new ObjectInputStream(fin);
-            object = ois.readObject();
+            object = (ArrayList<Conta>)ois.readObject();
             ois.close();
 
             return object;
-            
         } 
         catch (FileNotFoundException e){
-            Escreve("", arquivo);
-            return "";
+            return null;
         }
         catch (Exception e) {
             e.printStackTrace();
-            return "";
+            return null;
+        }
+    }
+
+    ArrayList<Entrada> LeEntradas(String arquivo) {
+        ArrayList<Entrada> object;        
+        try {
+            FileInputStream fin = new FileInputStream(arquivo);
+            ObjectInputStream ois = new ObjectInputStream(fin);
+            object = (ArrayList<Entrada>)ois.readObject();
+            ois.close();
+
+            return object;
+        } 
+        catch (FileNotFoundException e){
+            return null;
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    ArrayList<Saida> LeSaidas(String arquivo) {
+        ArrayList<Saida> object;        
+        try {
+            FileInputStream fin = new FileInputStream(arquivo);
+            ObjectInputStream ois = new ObjectInputStream(fin);
+            object = (ArrayList<Saida>)ois.readObject();
+            ois.close();
+
+            return object;
+        } 
+        catch (FileNotFoundException e){
+            return null;
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            return null;
         }
     }
 }
