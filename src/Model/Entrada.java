@@ -15,7 +15,7 @@ import java.util.Date;
 public class Entrada extends Transacao implements Serializable {
     public Conta Conta;
     
-    public Entrada(Date data, Conta conta, Double valor){
+    public Entrada(String data, Conta conta, Double valor){
         Descricao = conta.getNome();
         super.Data = data;
         super.Valor = valor;
@@ -25,6 +25,20 @@ public class Entrada extends Transacao implements Serializable {
     @Override
     public void Movimentar(Double valor) {
         Conta.Credito(valor);
+    }    
+
+    @Override
+    public String getDescricao() {
+        return super.Descricao;
     }
-    
+
+    @Override
+    public Double getValor() {
+        return super.Valor;
+    }
+
+    @Override
+    public String getData() {
+        return super.Data;
+    }
 }
