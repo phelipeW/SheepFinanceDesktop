@@ -51,6 +51,9 @@ public class ControleEntrada {
         return contas;
     }
     
+    public ArrayList<Entrada> BuscarEntradas(){
+        return localDataBase.getEntradas();
+    }
     
 
 }

@@ -38,4 +38,8 @@ public class ControleSaida {
         
         return nomesContas;
     }
+    
+    public ArrayList<Saida> BuscarSaidas(){
+        return localDataBase.getSaidas();
+    }
 }

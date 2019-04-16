@@ -20,7 +20,7 @@ public class ControleConta {
         localDataBase.addConta(c);
     }
     
-    public ArrayList<Conta> getContas(){
+    public ArrayList<Conta> BuscarContas(){
         return localDataBase.getContas();
     }
     

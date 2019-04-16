@@ -12,7 +12,6 @@ import Control.ControleEntrada;
 import Control.ControleSaida;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.table.DefaultTableModel;
-import Model.Conta;
 
 
 
@@ -26,16 +25,42 @@ public class tela1 extends javax.swing.JFrame {
     ControleEntrada controleEntrada = new ControleEntrada();
     ControleSaida controleSaida = new ControleSaida();
     
-    public void adicionaLinhaTabela(){
-        DefaultTableModel model = (DefaultTableModel) jTableEntrada.getModel();
+    public void adicionaLinhaTabelaContas(){
+        DefaultTableModel model = (DefaultTableModel) jTableContas.getModel();
         Object rowData[] = new Object[2];
-        for(int i = model.getRowCount(); i<controleEntrada.BuscarContas().size() ;i++){
-            rowData[0] = controleEntrada.BuscarContas().get(i).getNome();
-            rowData[1] = controleEntrada.BuscarContas().get(i).getSaldo();
+        model.setRowCount(0);
+        for(int i = model.getRowCount(); i<controleConta.BuscarContas().size() ;i++){
+            rowData[0] = controleConta.BuscarContas().get(i).getNome();
+            rowData[1] = controleConta.BuscarContas().get(i).getSaldo();
             model.addRow(rowData);
         }
         
         
+   
+    }
+    
+    public void adicionaLinhaTabelaEntradas(){
+        DefaultTableModel model = (DefaultTableModel) jTableEntradas.getModel();
+       
+        Object rowData[] = new Object[3];
+        
+        for(int i = model.getRowCount(); i<controleEntrada.BuscarEntradas().size() ;i++){
+            rowData[0] = controleEntrada.BuscarEntradas().get(i).getDescricao();
+            rowData[1] = controleEntrada.BuscarEntradas().get(i).getData();
+            rowData[2] = controleEntrada.BuscarEntradas().get(i).getValor();
+            model.addRow(rowData);
+        }
+    }
+    
+    public void adicionaLinhaTabelaSaidas(){
+        DefaultTableModel model = (DefaultTableModel) jTableSaidas.getModel();
+        Object rowData[] = new Object[3];
+        for(int i = model.getRowCount(); i<controleSaida.BuscarSaidas().size() ;i++){
+            rowData[0] = controleSaida.BuscarSaidas().get(i).getDescricao();
+            rowData[1] = controleSaida.BuscarSaidas().get(i).getData();
+            rowData[2] = controleSaida.BuscarSaidas().get(i).getValor();
+            model.addRow(rowData);
+        }
     }
     
 
@@ -63,24 +88,20 @@ public class tela1 extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jComboBoxContaEntrada = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
-        jComboBoxMesEntrada = new javax.swing.JComboBox<>();
-        jComboBoxAnoEntrada = new javax.swing.JComboBox<>();
-        jLabelMesEntrada = new javax.swing.JLabel();
-        jLabelAnoEntrada = new javax.swing.JLabel();
         jButtonConfirmarEntrada = new javax.swing.JButton();
         jTextFieldDataEntrada = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTableEntradas = new javax.swing.JTable();
         jPanel2 = new javax.swing.JPanel();
         jLabel13 = new javax.swing.JLabel();
         jTextFieldValorSaida = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
         jComboBoxContaSaida = new javax.swing.JComboBox<>();
         jLabel15 = new javax.swing.JLabel();
-        jComboBoxMesSaida = new javax.swing.JComboBox<>();
-        jComboBoxAnoSaida = new javax.swing.JComboBox<>();
-        jLabel16 = new javax.swing.JLabel();
-        jLabel17 = new javax.swing.JLabel();
         jButtonConfirmarSaida = new javax.swing.JButton();
         jTextFieldDataSaida = new javax.swing.JTextField();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jTableSaidas = new javax.swing.JTable();
         jPanel3 = new javax.swing.JPanel();
         jLabel18 = new javax.swing.JLabel();
         jTextFieldNomeConta = new javax.swing.JTextField();
@@ -88,7 +109,7 @@ public class tela1 extends javax.swing.JFrame {
         jButtonConfirmarConta = new javax.swing.JButton();
         jTextFieldValorInicial = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTableEntrada = new javax.swing.JTable();
+        jTableContas = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -113,20 +134,33 @@ public class tela1 extends javax.swing.JFrame {
 
         jLabel3.setText("Conta");
 
-        jComboBoxMesEntrada.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro" }));
-
-        jComboBoxAnoEntrada.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "2019", "2018" }));
-
-        jLabelMesEntrada.setText("Mes");
-
-        jLabelAnoEntrada.setText("Ano");
-
         jButtonConfirmarEntrada.setText("Confirmar");
         jButtonConfirmarEntrada.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonConfirmarEntradaActionPerformed(evt);
             }
         });
+
+        jTableEntradas.setBackground(new java.awt.Color(51, 255, 51));
+        jTableEntradas.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Conta", "Data", "Valor"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jTableEntradas.setGridColor(new java.awt.Color(153, 153, 153));
+        jTableEntradas.setSelectionBackground(new java.awt.Color(51, 102, 255));
+        jScrollPane1.setViewportView(jTableEntradas);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -135,28 +169,23 @@ public class tela1 extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextFieldValorEntrada, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2)
-                    .addComponent(jTextFieldDataEntrada, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jComboBoxMesEntrada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabelMesEntrada))
+                            .addComponent(jTextFieldValorEntrada, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabelAnoEntrada)
-                            .addComponent(jComboBoxAnoEntrada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jComboBoxContaEntrada, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButtonConfirmarEntrada)))
-                .addContainerGap(352, Short.MAX_VALUE))
+                            .addComponent(jLabel2)
+                            .addComponent(jTextFieldDataEntrada, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jComboBoxContaEntrada, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jButtonConfirmarEntrada))))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -172,15 +201,9 @@ public class tela1 extends javax.swing.JFrame {
                     .addComponent(jComboBoxContaEntrada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonConfirmarEntrada)
                     .addComponent(jTextFieldDataEntrada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(22, 22, 22)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelMesEntrada)
-                    .addComponent(jLabelAnoEntrada))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBoxMesEntrada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBoxAnoEntrada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(440, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(16, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Entradas", jPanel1);
@@ -197,20 +220,31 @@ public class tela1 extends javax.swing.JFrame {
 
         jLabel15.setText("Conta");
 
-        jComboBoxMesSaida.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro" }));
-
-        jComboBoxAnoSaida.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "2019", "2018" }));
-
-        jLabel16.setText("Mes");
-
-        jLabel17.setText("Ano");
-
         jButtonConfirmarSaida.setText("Confirmar");
         jButtonConfirmarSaida.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonConfirmarSaidaActionPerformed(evt);
             }
         });
+
+        jTableSaidas.setBackground(new java.awt.Color(255, 0, 0));
+        jTableSaidas.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Conta", "Data", "Valor"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane3.setViewportView(jTableSaidas);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -219,28 +253,23 @@ public class tela1 extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextFieldValorSaida, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel13))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel14)
-                    .addComponent(jTextFieldDataSaida, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel15)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jComboBoxMesSaida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel16))
+                            .addComponent(jTextFieldValorSaida, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel13))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel17)
-                            .addComponent(jComboBoxAnoSaida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jComboBoxContaSaida, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButtonConfirmarSaida)))
-                .addContainerGap(352, Short.MAX_VALUE))
+                            .addComponent(jLabel14)
+                            .addComponent(jTextFieldDataSaida, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel15)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jComboBoxContaSaida, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jButtonConfirmarSaida))))
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -256,15 +285,9 @@ public class tela1 extends javax.swing.JFrame {
                     .addComponent(jComboBoxContaSaida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonConfirmarSaida)
                     .addComponent(jTextFieldDataSaida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(22, 22, 22)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel16)
-                    .addComponent(jLabel17))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBoxMesSaida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBoxAnoSaida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(440, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(16, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Saídas", jPanel2);
@@ -280,7 +303,7 @@ public class tela1 extends javax.swing.JFrame {
             }
         });
 
-        jTableEntrada.setModel(new javax.swing.table.DefaultTableModel(
+        jTableContas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -296,7 +319,7 @@ public class tela1 extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane2.setViewportView(jTableEntrada);
+        jScrollPane2.setViewportView(jTableContas);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -305,18 +328,18 @@ public class tela1 extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextFieldNomeConta, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel18))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel19)
-                    .addComponent(jTextFieldValorInicial, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jButtonConfirmarConta)
-                .addContainerGap(468, Short.MAX_VALUE))
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jTextFieldNomeConta, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel18))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel19)
+                            .addComponent(jTextFieldValorInicial, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addComponent(jButtonConfirmarConta))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -330,9 +353,9 @@ public class tela1 extends javax.swing.JFrame {
                     .addComponent(jTextFieldNomeConta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonConfirmarConta)
                     .addComponent(jTextFieldValorInicial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(25, 25, 25))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Contas", jPanel3);
@@ -342,16 +365,14 @@ public class tela1 extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 800, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(277, Short.MAX_VALUE))
+                .addContainerGap(23, Short.MAX_VALUE)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 483, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 600, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(237, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 559, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
@@ -372,42 +393,20 @@ public class tela1 extends javax.swing.JFrame {
                     "Entrada",
                     JOptionPane.ERROR_MESSAGE);
         }else{
-            adicionaLinhaTabela();
+            
             controleEntrada.SalvarEntrada(validaValorEntrada, jTextFieldDataEntrada.getText(), jComboBoxContaEntrada.getSelectedItem());
             JOptionPane.showMessageDialog(this,
                     "Entrada adicionada com sucesso!" ,
                     "Entrada",
                     JOptionPane.INFORMATION_MESSAGE);
+            adicionaLinhaTabelaEntradas();
+            adicionaLinhaTabelaContas();
         }
             
             
         
         
     }//GEN-LAST:event_jButtonConfirmarEntradaActionPerformed
-
-    private void jButtonConfirmarSaidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirmarSaidaActionPerformed
-       
-        double validaValorSaida = Double.parseDouble(jTextFieldValorSaida.getText());
-        
-        if(jTextFieldValorSaida.getText().equals("") || validaValorSaida <= 0){
-            JOptionPane.showMessageDialog(this,
-                    "Valor de saida invalido!" ,
-                    "Saida",
-                    JOptionPane.ERROR_MESSAGE);
-        }else if(jTextFieldDataSaida.getText().equals("")){
-            JOptionPane.showMessageDialog(this,
-                    "Data invalida!!" ,
-                    "Saida",
-                    JOptionPane.ERROR_MESSAGE);
-        }else{
-            
-            controleSaida.SalvarSaida(validaValorSaida, jTextFieldDataSaida.getText(), jComboBoxContaSaida.getSelectedItem());
-            JOptionPane.showMessageDialog(this,
-                    "Saida adicionada com sucesso!" ,
-                    "Saida",
-                    JOptionPane.INFORMATION_MESSAGE);
-        }
-    }//GEN-LAST:event_jButtonConfirmarSaidaActionPerformed
 
     private void jComboBoxContaEntradaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jComboBoxContaEntradaMouseClicked
         jComboBoxContaEntrada.setModel(new DefaultComboBoxModel(controleEntrada.BuscarNomeContas().toArray()));
@@ -422,7 +421,7 @@ public class tela1 extends javax.swing.JFrame {
                     "Nome invalido!" ,
                     "Conta",
                     JOptionPane.ERROR_MESSAGE);
-        }else if(validaValorInicial <= 0){
+        }else if(validaValorInicial < 0){
             JOptionPane.showMessageDialog(this,
                     "Valor invalido!!!!" ,
                     "Conta",
@@ -433,24 +432,51 @@ public class tela1 extends javax.swing.JFrame {
                     "Conta adicionada com sucesso!" ,
                     "Conta",
                     JOptionPane.INFORMATION_MESSAGE);
-            jComboBoxContaSaida.setModel(new DefaultComboBoxModel(controleSaida.BuscarNomeConta().toArray()));
-            jComboBoxContaEntrada.setModel(new DefaultComboBoxModel(controleEntrada.BuscarNomeContas().toArray()));
-            jTableEntrada.removeAll();
-            adicionaLinhaTabela();
+            
+            adicionaLinhaTabelaContas();
         }
     }//GEN-LAST:event_jButtonConfirmarContaActionPerformed
-
-    private void jComboBoxContaSaidaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jComboBoxContaSaidaMouseClicked
-        jComboBoxContaSaida.setModel(new DefaultComboBoxModel(controleSaida.BuscarNomeConta().toArray()));
-    }//GEN-LAST:event_jComboBoxContaSaidaMouseClicked
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         jComboBoxContaSaida.setModel(new DefaultComboBoxModel(controleSaida.BuscarNomeConta().toArray()));
         jComboBoxContaEntrada.setModel(new DefaultComboBoxModel(controleEntrada.BuscarNomeContas().toArray()));
-        adicionaLinhaTabela();
+        adicionaLinhaTabelaContas();
+        adicionaLinhaTabelaEntradas();
+        adicionaLinhaTabelaSaidas();
                
        
     }//GEN-LAST:event_formWindowOpened
+
+    private void jButtonConfirmarSaidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirmarSaidaActionPerformed
+
+        double validaValorSaida = Double.parseDouble(jTextFieldValorSaida.getText());
+
+        if(jTextFieldValorSaida.getText().equals("") || validaValorSaida <= 0){
+            JOptionPane.showMessageDialog(this,
+                "Valor de saida invalido!" ,
+                "Saida",
+                JOptionPane.ERROR_MESSAGE);
+        }else if(jTextFieldDataSaida.getText().equals("")){
+            JOptionPane.showMessageDialog(this,
+                "Data invalida!!" ,
+                "Saida",
+                JOptionPane.ERROR_MESSAGE);
+        }else{
+
+            controleSaida.SalvarSaida(validaValorSaida, jTextFieldDataSaida.getText(), jComboBoxContaSaida.getSelectedItem());
+            JOptionPane.showMessageDialog(this,
+                "Saida adicionada com sucesso!" ,
+                "Saida",
+                JOptionPane.INFORMATION_MESSAGE);
+
+            adicionaLinhaTabelaSaidas();
+            adicionaLinhaTabelaContas();
+        }
+    }//GEN-LAST:event_jButtonConfirmarSaidaActionPerformed
+
+    private void jComboBoxContaSaidaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jComboBoxContaSaidaMouseClicked
+        jComboBoxContaSaida.setModel(new DefaultComboBoxModel(controleSaida.BuscarNomeConta().toArray()));
+    }//GEN-LAST:event_jComboBoxContaSaidaMouseClicked
 
     /**
      * @param args the command line arguments
@@ -491,30 +517,26 @@ public class tela1 extends javax.swing.JFrame {
     private javax.swing.JButton jButtonConfirmarConta;
     private javax.swing.JButton jButtonConfirmarEntrada;
     private javax.swing.JButton jButtonConfirmarSaida;
-    private javax.swing.JComboBox<String> jComboBoxAnoEntrada;
-    private javax.swing.JComboBox<String> jComboBoxAnoSaida;
     private javax.swing.JComboBox<String> jComboBoxContaEntrada;
     private javax.swing.JComboBox<String> jComboBoxContaSaida;
-    private javax.swing.JComboBox<String> jComboBoxMesEntrada;
-    private javax.swing.JComboBox<String> jComboBoxMesSaida;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabelAnoEntrada;
-    private javax.swing.JLabel jLabelMesEntrada;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTable jTableEntrada;
+    private javax.swing.JTable jTableContas;
+    private javax.swing.JTable jTableEntradas;
+    private javax.swing.JTable jTableSaidas;
     private javax.swing.JTextField jTextFieldDataEntrada;
     private javax.swing.JTextField jTextFieldDataSaida;
     private javax.swing.JTextField jTextFieldNomeConta;
