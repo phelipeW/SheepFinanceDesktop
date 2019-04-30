@@ -16,6 +16,7 @@ import java.io.FileOutputStream;
 
 import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 
 import java.util.ArrayList;
 
@@ -31,11 +32,11 @@ public class Persistencia {
     public void EscreveConta(ArrayList<Conta> contas, String arquivo){
         try {
             FileOutputStream fout = new FileOutputStream(arquivo);
-            //ObjectOutputStream oos = new ObjectOutputStream(fout);
-            fout.write(getObjectContas(contas).getBytes());
-            //oos.writeObject(object);
+            ObjectOutputStream oos = new ObjectOutputStream(fout);
+            //fout.write(getObjectContas(contas).getBytes());
+            oos.writeObject(contas);
 
-            //oos.close();
+            oos.close();
             System.out.println("Done");
         } catch (Exception e) {
             e.printStackTrace();
@@ -70,15 +71,15 @@ public class Persistencia {
         StringBuilder json = new StringBuilder();
         try {
             FileInputStream fin = new FileInputStream(arquivo);
-//            ObjectInputStream ois = new ObjectInputStream(fin);
-//            object = (ArrayList<Conta>)ois.readObject();
-//            ois.close();
-            BufferedReader in = new BufferedReader(new InputStreamReader(fin));
-            while((line = in.readLine()) != null) {
-                json.append(line);
-            }
+            ObjectInputStream ois = new ObjectInputStream(fin);
+            object = (ArrayList<Conta>)ois.readObject();
+            ois.close();
+//            BufferedReader in = new BufferedReader(new InputStreamReader(fin));
+//            while((line = in.readLine()) != null) {
+//                json.append(line);
+//            }
             
-            object = readObjectContas(json.toString());
+//            object = readObjectContas(json.toString());
             
             return object;
         } 
