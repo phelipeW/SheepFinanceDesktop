@@ -33,9 +33,9 @@ public class LocalDatabase {
             bd = new Persistencia();
             instancia = new LocalDatabase();
             
-            Contas = bd.LeContas("contas.txt");
-            Entradas = bd.LeEntradas("entradas.txt");
-            Saidas = bd.LeSaidas("saidas.txt");
+            Contas = (ArrayList<Conta>)bd.Le("contas.txt");
+            Entradas = (ArrayList<Entrada>)bd.Le("entradas.txt");
+            Saidas = (ArrayList<Saida>)bd.Le("saidas.txt");
 
             if(Contas == null)
                 Contas = new ArrayList<>();        
@@ -54,7 +54,7 @@ public class LocalDatabase {
     
     public void addConta(Conta conta){
         Contas.add(conta);
-        bd.EscreveConta(getContas(), "contas.txt");
+        bd.Escreve(getContas(), "contas.txt");
     }
     
     public void deleteConta(Conta conta){
@@ -76,8 +76,8 @@ public class LocalDatabase {
     
     public void addEntrada(Entrada entrada){
         Entradas.add(entrada);
-        bd.EscreveEntrada(getEntradas(), "entradas.txt");
-        bd.EscreveConta(getContas(), "contas.txt");
+        bd.Escreve(getEntradas(), "entradas.txt");
+        bd.Escreve(getContas(), "contas.txt");
     }
         
     public void deleteEntrada(Entrada entrada){
@@ -90,8 +90,8 @@ public class LocalDatabase {
     
     public void addSaida(Saida saida){
         Saidas.add(saida);
-        bd.EscreveSaida(getSaidas(), "saidas.txt");
-        bd.EscreveConta(getContas(), "contas.txt");
+        bd.Escreve(getSaidas(), "saidas.txt");
+        bd.Escreve(getContas(), "contas.txt");
     }
     
     public void deleteSaida(Saida saida){
