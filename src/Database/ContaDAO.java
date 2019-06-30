@@ -58,12 +58,11 @@ public class ContaDAO extends AbstractDAO<Conta> {
 
     @Override
     protected Conta populaObjetoListar(ResultSet result) throws Exception {
-//         return Conta.builder()
-//                .id(result.getInt("id"))
-//                .nome(result.getString("nome"))
-//                .saldo(result.getDouble("saldo"))
-//                .build();
-        return null;
+         return Conta.builder()
+            .Id(result.getInt("id"))
+            .Nome(result.getString("nome"))
+            .Saldo(result.getDouble("saldo"))
+            .build();
     }
 
     @Override
