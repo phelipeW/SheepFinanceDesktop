@@ -6,12 +6,15 @@
 package Model;
 
 import java.util.Date;
+import lombok.Data;
 
 /**
  *
  * @author abelo
  */
+@Data
 public abstract class Transacao {
+   
     public String Descricao;
     public Double Valor;
     public String Data;

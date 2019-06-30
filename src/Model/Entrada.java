@@ -21,7 +21,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Entrada extends Transacao implements Serializable {
-    private Conta Conta;
+    public int Id;
+    public Conta Conta;
     
     public Entrada(String data, Conta conta, Double valor){
         Descricao = conta.getNome();
