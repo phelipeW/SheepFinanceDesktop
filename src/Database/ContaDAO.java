@@ -53,7 +53,7 @@ public class ContaDAO extends AbstractDAO<Conta> {
 
     @Override
     protected String getStringSQLListar() {
-        return "SELECT * FROM Conta";
+        return "SELECT * FROM public.\"Conta\"";
     }
 
     @Override

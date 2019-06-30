@@ -5,8 +5,10 @@
  */
 package Control;
 
+import Database.ContaDAO;
 import Model.Conta;
 import java.util.ArrayList;
+import java.util.List;
 /**
  *
  * @author pheli
@@ -16,9 +18,10 @@ public class ControleConta {
         
     }
     
-    public ArrayList<Conta> BuscarContas(){
-//        return localDataBase.getContas();
-        return null;
+    public List<Conta> BuscarContas(){
+        ContaDAO contaDAO = new ContaDAO();
+        return contaDAO.listarTodos();
+//        return null;
     }
     
     

@@ -27,7 +27,7 @@ public abstract class AbstractDAO<T> {
     protected abstract void mapeamentoObjetoRelationalIncluir(PreparedStatement statement, T entidade) throws Exception;
     
     public boolean incluir(T entidade) {
-        try ( Connection conn = (Connection)DriverManager.getConnection("jdbc:postgresql://localhost/sheepfinancedesktop", USER, PASS)) {
+        try ( Connection conn = (Connection)DriverManager.getConnection(DB_URL, USER, PASS)) {
 
             String sql = getStringSQLIncluir();
 
@@ -53,7 +53,7 @@ public abstract class AbstractDAO<T> {
 
         List<T> resultado = new ArrayList<>();
 
-        try ( Connection conn = DriverManager.getConnection("jdbc:derby:memory:database")) {
+        try ( Connection conn = DriverManager.getConnection(DB_URL, USER, PASS)) {
 
             String sql = getStringSQLListar();
 
@@ -75,7 +75,7 @@ public abstract class AbstractDAO<T> {
     
     public boolean excluir(int id) {
 
-        try (Connection conn = DriverManager.getConnection("jdbc:derby:memory:database")) {
+        try (Connection conn = DriverManager.getConnection(DB_URL, USER, PASS)) {
 
             String sql = getStringSQLExcluir();
 
@@ -97,7 +97,7 @@ public abstract class AbstractDAO<T> {
     protected abstract void mapeamentoObjetoRelationalAlterar(PreparedStatement statement, T entidade) throws Exception;
     
     public boolean alterar(T entidade) {
-        try ( Connection conn = DriverManager.getConnection("jdbc:derby:memory:database")) {
+        try ( Connection conn = DriverManager.getConnection(DB_URL, USER, PASS)) {
 
             String sql = getStringSQLAlterar();
 

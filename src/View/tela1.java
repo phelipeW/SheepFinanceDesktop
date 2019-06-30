@@ -10,6 +10,8 @@ import javax.swing.JOptionPane;
 import Control.ControleConta;
 import Control.ControleEntrada;
 import Control.ControleSaida;
+import Model.Conta;
+import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.table.DefaultTableModel;
 
@@ -29,14 +31,12 @@ public class tela1 extends javax.swing.JFrame {
         DefaultTableModel model = (DefaultTableModel) jTableContas.getModel();
         Object rowData[] = new Object[2];
         model.setRowCount(0);
-        for(int i = model.getRowCount(); i<controleConta.BuscarContas().size() ;i++){
-            rowData[0] = controleConta.BuscarContas().get(i).getNome();
-            rowData[1] = controleConta.BuscarContas().get(i).getSaldo();
+        List<Conta> contas = controleConta.BuscarContas();
+        for(int i = model.getRowCount(); i<contas.size() ;i++){
+            rowData[0] = contas.get(i).getNome();
+            rowData[1] = contas.get(i).getSaldo();
             model.addRow(rowData);
         }
-        
-        
-   
     }
     
     public void adicionaLinhaTabelaEntradas(){
@@ -402,10 +402,6 @@ public class tela1 extends javax.swing.JFrame {
             adicionaLinhaTabelaEntradas();
             adicionaLinhaTabelaContas();
         }
-            
-            
-        
-        
     }//GEN-LAST:event_jButtonConfirmarEntradaActionPerformed
 
     private void jComboBoxContaEntradaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jComboBoxContaEntradaMouseClicked
@@ -435,6 +431,8 @@ public class tela1 extends javax.swing.JFrame {
             
             adicionaLinhaTabelaContas();
         }
+        jTextFieldNomeConta.setText("");
+        jTextFieldValorInicial.setText("");
     }//GEN-LAST:event_jButtonConfirmarContaActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
