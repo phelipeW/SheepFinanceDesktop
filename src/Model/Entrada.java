@@ -12,7 +12,9 @@ import java.util.Date;
  *
  * @author abelo
  */
+
 public class Entrada extends Transacao implements Serializable {
+    public int Id;
     public Conta Conta;
     
     public Entrada(String data, Conta conta, Double valor){
@@ -26,7 +28,11 @@ public class Entrada extends Transacao implements Serializable {
     public void Movimentar(Double valor) {
         Conta.Credito(valor);
     }    
-
+  
+    public int getId() {
+        return this.Id;
+    }
+    
     @Override
     public String getDescricao() {
         return super.Descricao;

@@ -11,6 +11,8 @@ import Control.ControleConta;
 import Control.ControleEntrada;
 import Control.ControleSaida;
 import Model.Conta;
+import Model.Entrada;
+import Model.Saida;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.table.DefaultTableModel;
@@ -29,12 +31,13 @@ public class tela1 extends javax.swing.JFrame {
     
     public void adicionaLinhaTabelaContas(){
         DefaultTableModel model = (DefaultTableModel) jTableContas.getModel();
-        Object rowData[] = new Object[2];
+        Object rowData[] = new Object[3];
         model.setRowCount(0);
         List<Conta> contas = controleConta.BuscarContas();
         for(int i = model.getRowCount(); i<contas.size() ;i++){
-            rowData[0] = contas.get(i).getNome();
-            rowData[1] = contas.get(i).getSaldo();
+            rowData[0] = contas.get(i).getId();
+            rowData[1] = contas.get(i).getNome();
+            rowData[2] = contas.get(i).getSaldo();
             model.addRow(rowData);
         }
     }
@@ -42,12 +45,14 @@ public class tela1 extends javax.swing.JFrame {
     public void adicionaLinhaTabelaEntradas(){
         DefaultTableModel model = (DefaultTableModel) jTableEntradas.getModel();
        
-        Object rowData[] = new Object[3];
+        Object rowData[] = new Object[4];
         
-        for(int i = model.getRowCount(); i<controleEntrada.BuscarEntradas().size() ;i++){
-            rowData[0] = controleEntrada.BuscarEntradas().get(i).getDescricao();
-            rowData[1] = controleEntrada.BuscarEntradas().get(i).getData();
-            rowData[2] = controleEntrada.BuscarEntradas().get(i).getValor();
+        List<Entrada> entradas = controleEntrada.BuscarEntradas();
+        for(int i = model.getRowCount(); i<entradas.size() ;i++){
+            rowData[0] = entradas.get(i).getId();
+            rowData[1] = entradas.get(i).getDescricao();
+            rowData[2] = entradas.get(i).getData();
+            rowData[3] = entradas.get(i).getValor();
             model.addRow(rowData);
         }
     }
@@ -55,10 +60,13 @@ public class tela1 extends javax.swing.JFrame {
     public void adicionaLinhaTabelaSaidas(){
         DefaultTableModel model = (DefaultTableModel) jTableSaidas.getModel();
         Object rowData[] = new Object[3];
-        for(int i = model.getRowCount(); i<controleSaida.BuscarSaidas().size() ;i++){
-            rowData[0] = controleSaida.BuscarSaidas().get(i).getDescricao();
-            rowData[1] = controleSaida.BuscarSaidas().get(i).getData();
-            rowData[2] = controleSaida.BuscarSaidas().get(i).getValor();
+
+        List<Saida> saidas = controleSaida.BuscarSaidas();
+        for(int i = model.getRowCount(); i<saidas.size() ;i++){
+            rowData[0] = saidas.get(i).getId();
+            rowData[1] = saidas.get(i).getDescricao();
+            rowData[2] = saidas.get(i).getData();
+            rowData[3] = saidas.get(i).getValor();
             model.addRow(rowData);
         }
     }
@@ -147,11 +155,11 @@ public class tela1 extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Conta", "Data", "Valor"
+                "ID", "Conta", "Data", "Valor"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false
+                false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -233,11 +241,11 @@ public class tela1 extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Conta", "Data", "Valor"
+                "ID", "Conta", "Data", "Valor"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false
+                false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -308,11 +316,11 @@ public class tela1 extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Conta", "Saldo"
+                "ID", "Conta", "Saldo"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false
+                false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
