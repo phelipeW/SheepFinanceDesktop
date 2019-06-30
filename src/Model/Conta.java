@@ -5,29 +5,25 @@
  */
 package Model;
 
-import java.io.Serializable;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 
 /**
  *
  * @author abelo
  */
-public class Conta implements Serializable {
+@Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+public class Conta {
+    private int Id;
     private String Nome;   
     private Double Saldo;
     
-    public Conta(String nome, Double saldo){
-        Nome = nome;
-        Saldo = saldo;
-    }
-    
-    public String getNome(){
-        return Nome;
-    }
-    
-    public Double getSaldo(){
-        return Saldo;
-    }
-
     public void Credito(Double valor) {
         Saldo += valor;
     }
