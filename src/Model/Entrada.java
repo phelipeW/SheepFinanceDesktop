@@ -7,13 +7,21 @@ package Model;
 
 import java.io.Serializable;
 import java.util.Date;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  *
  * @author abelo
  */
+@Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class Entrada extends Transacao implements Serializable {
-    public Conta Conta;
+    private Conta Conta;
     
     public Entrada(String data, Conta conta, Double valor){
         Descricao = conta.getNome();
@@ -25,20 +33,5 @@ public class Entrada extends Transacao implements Serializable {
     @Override
     public void Movimentar(Double valor) {
         Conta.Credito(valor);
-    }    
-
-    @Override
-    public String getDescricao() {
-        return super.Descricao;
-    }
-
-    @Override
-    public Double getValor() {
-        return super.Valor;
-    }
-
-    @Override
-    public String getData() {
-        return super.Data;
     }
 }

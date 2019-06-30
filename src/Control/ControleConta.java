@@ -15,7 +15,12 @@ import java.util.List;
  */
 public class ControleConta {
     public void SalvarConta(String nome, double valorInicial ){
+        Conta conta = new Conta();
+        conta.setNome(nome);
+        conta.setSaldo(valorInicial);
         
+        ContaDAO contaDAO = new ContaDAO();
+        contaDAO.incluir(conta);
     }
     
     public List<Conta> BuscarContas(){
