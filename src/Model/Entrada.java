@@ -20,11 +20,13 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class Entrada extends Transacao {
+public class Entrada {
     public int Id;
     public Conta Conta;
+    public String Descricao;
+    public Double Valor;
+    public String Data;
     
-    @Override
     public void Movimentar(Double valor) {
         Conta.Credito(valor);
     }

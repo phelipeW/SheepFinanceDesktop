@@ -5,6 +5,7 @@
  */
 package Control;
 
+import Database.ContaDAO;
 import Database.EntradaDAO;
 import Model.Conta;
 import Model.Entrada;
@@ -19,13 +20,14 @@ import java.util.Date;
  */
 public class ControleEntrada {
     public void SalvarEntrada(double valor, String data, Object conta){
-        Conta contaDTO = (Conta)conta;
+        ContaDAO contaDAO = new ContaDAO();
+        List<Conta> contaDTO = contaDAO.retornaUm((String)conta);
         
         Entrada entrada = new Entrada();
-        entrada.setDescricao(contaDTO.getNome());
+        entrada.setDescricao(contaDTO.get(0).getNome());
         entrada.setData(data);
         entrada.setValor(valor);
-        entrada.setConta(contaDTO);
+        entrada.setConta(contaDTO.get(0));
         
         EntradaDAO entradaDAO = new EntradaDAO();
         entradaDAO.incluir(entrada);
