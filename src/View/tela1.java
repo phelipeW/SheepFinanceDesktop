@@ -16,6 +16,7 @@ import Model.Saida;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.table.DefaultTableModel;
+import View.EditarConta;
 
 
 
@@ -100,6 +101,8 @@ public class tela1 extends javax.swing.JFrame {
         jTextFieldDataEntrada = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableEntradas = new javax.swing.JTable();
+        jButtonEditarEntrada = new javax.swing.JButton();
+        jButtonExcluirEntrada = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel13 = new javax.swing.JLabel();
         jTextFieldValorSaida = new javax.swing.JTextField();
@@ -110,6 +113,8 @@ public class tela1 extends javax.swing.JFrame {
         jTextFieldDataSaida = new javax.swing.JTextField();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTableSaidas = new javax.swing.JTable();
+        jButtonEditarSaida = new javax.swing.JButton();
+        jButtonExcluirSaida = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jLabel18 = new javax.swing.JLabel();
         jTextFieldNomeConta = new javax.swing.JTextField();
@@ -118,6 +123,8 @@ public class tela1 extends javax.swing.JFrame {
         jTextFieldValorInicial = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTableContas = new javax.swing.JTable();
+        jButtonExcluirConta = new javax.swing.JButton();
+        jButtonEditarConta = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -170,6 +177,24 @@ public class tela1 extends javax.swing.JFrame {
         jTableEntradas.setSelectionBackground(new java.awt.Color(51, 102, 255));
         jScrollPane1.setViewportView(jTableEntradas);
 
+        jButtonEditarEntrada.setText("Editar");
+        jButtonEditarEntrada.setMaximumSize(new java.awt.Dimension(79, 23));
+        jButtonEditarEntrada.setMinimumSize(new java.awt.Dimension(79, 23));
+        jButtonEditarEntrada.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonEditarEntradaActionPerformed(evt);
+            }
+        });
+
+        jButtonExcluirEntrada.setText("Excluir");
+        jButtonExcluirEntrada.setMaximumSize(new java.awt.Dimension(79, 23));
+        jButtonExcluirEntrada.setMinimumSize(new java.awt.Dimension(79, 23));
+        jButtonExcluirEntrada.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonExcluirEntradaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -192,7 +217,12 @@ public class tela1 extends javax.swing.JFrame {
                                 .addComponent(jComboBoxContaEntrada, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jButtonConfirmarEntrada))))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addComponent(jButtonEditarEntrada, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButtonExcluirEntrada, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(16, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -210,8 +240,12 @@ public class tela1 extends javax.swing.JFrame {
                     .addComponent(jButtonConfirmarEntrada)
                     .addComponent(jTextFieldDataEntrada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(16, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 355, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonEditarEntrada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonExcluirEntrada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(54, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Entradas", jPanel1);
@@ -254,6 +288,26 @@ public class tela1 extends javax.swing.JFrame {
         });
         jScrollPane3.setViewportView(jTableSaidas);
 
+        jButtonEditarSaida.setText("Alterar");
+        jButtonEditarSaida.setMaximumSize(new java.awt.Dimension(79, 23));
+        jButtonEditarSaida.setMinimumSize(new java.awt.Dimension(79, 23));
+        jButtonEditarSaida.setPreferredSize(new java.awt.Dimension(79, 23));
+        jButtonEditarSaida.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonEditarSaidaActionPerformed(evt);
+            }
+        });
+
+        jButtonExcluirSaida.setText("Excluir");
+        jButtonExcluirSaida.setMaximumSize(new java.awt.Dimension(79, 23));
+        jButtonExcluirSaida.setMinimumSize(new java.awt.Dimension(79, 23));
+        jButtonExcluirSaida.setPreferredSize(new java.awt.Dimension(79, 23));
+        jButtonExcluirSaida.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonExcluirSaidaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -276,7 +330,12 @@ public class tela1 extends javax.swing.JFrame {
                                 .addComponent(jComboBoxContaSaida, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jButtonConfirmarSaida))))
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
+                            .addComponent(jButtonEditarSaida, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButtonExcluirSaida, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(16, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -294,8 +353,12 @@ public class tela1 extends javax.swing.JFrame {
                     .addComponent(jButtonConfirmarSaida)
                     .addComponent(jTextFieldDataSaida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(16, Short.MAX_VALUE))
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 355, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonEditarSaida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonExcluirSaida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(54, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Saídas", jPanel2);
@@ -329,6 +392,26 @@ public class tela1 extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(jTableContas);
 
+        jButtonExcluirConta.setText("Excluir");
+        jButtonExcluirConta.setMaximumSize(new java.awt.Dimension(79, 23));
+        jButtonExcluirConta.setMinimumSize(new java.awt.Dimension(79, 23));
+        jButtonExcluirConta.setPreferredSize(new java.awt.Dimension(79, 23));
+        jButtonExcluirConta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonExcluirContaActionPerformed(evt);
+            }
+        });
+
+        jButtonEditarConta.setText("Alterar");
+        jButtonEditarConta.setMaximumSize(new java.awt.Dimension(79, 23));
+        jButtonEditarConta.setMinimumSize(new java.awt.Dimension(79, 23));
+        jButtonEditarConta.setPreferredSize(new java.awt.Dimension(79, 23));
+        jButtonEditarConta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonEditarContaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -346,7 +429,12 @@ public class tela1 extends javax.swing.JFrame {
                             .addComponent(jTextFieldValorInicial, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addComponent(jButtonConfirmarConta))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
+                            .addComponent(jButtonEditarConta, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButtonExcluirConta, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(16, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -362,8 +450,12 @@ public class tela1 extends javax.swing.JFrame {
                     .addComponent(jButtonConfirmarConta)
                     .addComponent(jTextFieldValorInicial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(16, Short.MAX_VALUE))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 356, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonExcluirConta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonEditarConta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(53, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Contas", jPanel3);
@@ -373,14 +465,14 @@ public class tela1 extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(23, Short.MAX_VALUE)
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 483, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 483, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 23, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 559, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 559, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 11, Short.MAX_VALUE))
         );
 
         pack();
@@ -409,6 +501,8 @@ public class tela1 extends javax.swing.JFrame {
                     JOptionPane.INFORMATION_MESSAGE);
             adicionaLinhaTabelaEntradas();
             adicionaLinhaTabelaContas();
+            
+          
         }
     }//GEN-LAST:event_jButtonConfirmarEntradaActionPerformed
 
@@ -484,6 +578,92 @@ public class tela1 extends javax.swing.JFrame {
         jComboBoxContaSaida.setModel(new DefaultComboBoxModel(controleSaida.BuscarNomeConta().toArray()));
     }//GEN-LAST:event_jComboBoxContaSaidaMouseClicked
 
+    private void jButtonExcluirContaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExcluirContaActionPerformed
+        
+        int linhaSelecionada = -1;
+            linhaSelecionada = jTableContas.getSelectedRow();
+            if (linhaSelecionada >= 0) {
+                int idConta = (int) jTableContas.getValueAt(linhaSelecionada, 0);
+                    controleConta.ExcluirConta(idConta);
+                
+            } else {
+                JOptionPane.showMessageDialog(null, 
+                "É necesário selecionar uma linha.");
+            }
+            
+    }//GEN-LAST:event_jButtonExcluirContaActionPerformed
+
+    private void jButtonEditarContaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditarContaActionPerformed
+        int linhaSelecionada = -1;
+            linhaSelecionada = jTableContas.getSelectedRow();
+            if (linhaSelecionada >= 0) {
+                int idConta = (int) jTableContas.getValueAt(linhaSelecionada, 0);
+                EditarConta ec = new EditarConta(idConta,linhaSelecionada);
+                ec.setVisible(true);
+                
+            } else {
+                JOptionPane.showMessageDialog(null, 
+                "É necesário selecionar uma linha.");
+            }
+            
+            
+                   
+    }//GEN-LAST:event_jButtonEditarContaActionPerformed
+
+    private void jButtonEditarSaidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditarSaidaActionPerformed
+        int linhaSelecionada = -1;
+            linhaSelecionada = jTableSaidas.getSelectedRow();
+            if (linhaSelecionada >= 0) {
+                int idSaida = (int) jTableSaidas.getValueAt(linhaSelecionada, 0);
+                EditarSaida es = new EditarSaida(idSaida,linhaSelecionada);
+                es.setVisible(true);
+                
+            } else {
+                JOptionPane.showMessageDialog(null, 
+                "É necesário selecionar uma linha.");
+            }
+    }//GEN-LAST:event_jButtonEditarSaidaActionPerformed
+
+    private void jButtonExcluirSaidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExcluirSaidaActionPerformed
+        int linhaSelecionada = -1;
+            linhaSelecionada = jTableSaidas.getSelectedRow();
+            if (linhaSelecionada >= 0) {
+                int idSaida = (int) jTableSaidas.getValueAt(linhaSelecionada, 0);
+                    controleSaida.ExcluirSaida(idSaida);
+                
+            } else {
+                JOptionPane.showMessageDialog(null, 
+                "É necesário selecionar uma linha.");
+            }
+    }//GEN-LAST:event_jButtonExcluirSaidaActionPerformed
+
+    private void jButtonEditarEntradaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditarEntradaActionPerformed
+        int linhaSelecionada = -1;
+            linhaSelecionada = jTableEntradas.getSelectedRow();
+            if (linhaSelecionada >= 0) {
+                int idEntrada = (int) jTableEntradas.getValueAt(linhaSelecionada, 0);
+                EditarEntrada ee = new EditarEntrada(idEntrada,linhaSelecionada);
+                ee.setVisible(true);
+                
+            } else {
+                JOptionPane.showMessageDialog(null, 
+                "É necesário selecionar uma linha.");
+            }
+    }//GEN-LAST:event_jButtonEditarEntradaActionPerformed
+
+    private void jButtonExcluirEntradaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExcluirEntradaActionPerformed
+        int linhaSelecionada = -1;
+            linhaSelecionada = jTableEntradas.getSelectedRow();
+            if (linhaSelecionada >= 0) {
+                int idEntrada = (int) jTableEntradas.getValueAt(linhaSelecionada, 0);
+                   controleSaida.ExcluirEntrada(idEntrada);
+                
+            } else {
+                JOptionPane.showMessageDialog(null, 
+                "É necesário selecionar uma linha.");
+            }
+    }//GEN-LAST:event_jButtonExcluirEntradaActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -523,6 +703,12 @@ public class tela1 extends javax.swing.JFrame {
     private javax.swing.JButton jButtonConfirmarConta;
     private javax.swing.JButton jButtonConfirmarEntrada;
     private javax.swing.JButton jButtonConfirmarSaida;
+    private javax.swing.JButton jButtonEditarConta;
+    private javax.swing.JButton jButtonEditarEntrada;
+    private javax.swing.JButton jButtonEditarSaida;
+    private javax.swing.JButton jButtonExcluirConta;
+    private javax.swing.JButton jButtonExcluirEntrada;
+    private javax.swing.JButton jButtonExcluirSaida;
     private javax.swing.JComboBox<String> jComboBoxContaEntrada;
     private javax.swing.JComboBox<String> jComboBoxContaSaida;
     private javax.swing.JLabel jLabel1;
