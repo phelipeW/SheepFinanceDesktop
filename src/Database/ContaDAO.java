@@ -79,7 +79,21 @@ public class ContaDAO extends AbstractDAO<Conta> {
     protected void mapeamentoObjetoRelationalAlterar(PreparedStatement statement, Conta entidade) throws Exception {
         statement.setString(1, entidade.getNome());
         statement.setDouble(2, entidade.getSaldo());
-        statement.setInt(6, entidade.getId());
+        statement.setInt(3, entidade.getId());
+    }
+
+    @Override
+    protected String getStringSQLOne(String nome) {
+        return "SELECT * FROM public.\"Conta\" WHERE nome='"+nome+"'";
+    }
+    
+    @Override
+    protected Conta populaObjetoOne(ResultSet result) throws Exception {
+        return Conta.builder()
+            .Id(result.getInt("id"))
+            .Nome(result.getString("nome"))
+            .Saldo(result.getDouble("saldo"))
+            .build();
     }
     
 }

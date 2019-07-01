@@ -5,9 +5,11 @@
  */
 package Control;
 
+import Database.SaidaDAO;
 import Model.Saida;
 import Model.Conta;
 import java.util.ArrayList;
+import java.util.List;
 /**
  *
  * @author pheli
@@ -15,14 +17,31 @@ import java.util.ArrayList;
 public class ControleSaida {
         
     public void SalvarSaida(double valor, String data, Object conta){
+        Conta contaDTO = (Conta)conta;
         
+        Saida saida = new Saida();
+        saida.setDescricao(contaDTO.getNome());
+        saida.setData(data);
+        saida.setValor(valor);
+        saida.setConta(contaDTO);
+        
+        SaidaDAO saidaDAO = new SaidaDAO();
+        saidaDAO.incluir(saida);
     }
     
-    public ArrayList<String> BuscarNomeConta(){
-        return null;
+    public List<String> BuscarNomeConta(){
+        ControleConta controle = new ControleConta();
+        List<Conta> contas = controle.BuscarContas();
+        List<String> nomes = new ArrayList<String>();
+        for(int i = 0; i<contas.size() ;i++){
+            nomes.add(contas.get(i).getNome());
+        }
+        
+        return nomes;
     }
     
-    public ArrayList<Saida> BuscarSaidas(){
-        return null;
+    public List<Saida> BuscarSaidas(){
+        SaidaDAO entradaDAO = new SaidaDAO();
+        return entradaDAO.listarTodos();
     }
 }

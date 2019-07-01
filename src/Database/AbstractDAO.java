@@ -48,7 +48,7 @@ public abstract class AbstractDAO<T> {
     
     protected abstract String getStringSQLListar();
     protected abstract T populaObjetoListar(ResultSet result) throws Exception;
-    
+       
     public List<T> listarTodos() {
 
         List<T> resultado = new ArrayList<>();
@@ -70,7 +70,33 @@ public abstract class AbstractDAO<T> {
 
         return resultado;
     }
+    
+    
+    protected abstract String getStringSQLOne(String nome);
+    protected abstract T populaObjetoOne(ResultSet result) throws Exception;
+    
+    public List<T> retornaUm(String nome) {
 
+        List<T> resultado = new ArrayList<>();
+
+        try ( Connection conn = DriverManager.getConnection(DB_URL, USER, PASS)) {
+
+            String sql = getStringSQLOne(nome);
+
+            Statement statement = conn.createStatement();
+            ResultSet result = statement.executeQuery(sql);
+
+            while (result.next())
+                resultado.add(populaObjetoOne(result));
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return resultado;
+    }
+    
     protected abstract String getStringSQLExcluir();
     
     public boolean excluir(int id) {
