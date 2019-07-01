@@ -106,7 +106,7 @@ public class EditarSaida extends javax.swing.JFrame {
 
     private void jButtonConfirmarEditarSaidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirmarEditarSaidaActionPerformed
         SaidaDAO dao = new SaidaDAO();
-          dao.alterar(jTextFieldValorEditarSaida);
+          //dao.alterar(jTextFieldValorEditarSaida);
         setVisible(false);
     }//GEN-LAST:event_jButtonConfirmarEditarSaidaActionPerformed
 

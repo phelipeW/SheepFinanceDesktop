@@ -656,7 +656,7 @@ public class tela1 extends javax.swing.JFrame {
             linhaSelecionada = jTableEntradas.getSelectedRow();
             if (linhaSelecionada >= 0) {
                 int idEntrada = (int) jTableEntradas.getValueAt(linhaSelecionada, 0);
-                   controleSaida.ExcluirEntrada(idEntrada);
+                   controleEntrada.ExcluirEntrada(idEntrada);
                 
             } else {
                 JOptionPane.showMessageDialog(null, 

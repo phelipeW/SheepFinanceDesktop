@@ -7,6 +7,8 @@ package Database;
 
 import Model.Conta;
 import Model.Saida;
+import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
@@ -16,6 +18,25 @@ import java.sql.ResultSet;
  */
 public class SaidaDAO extends AbstractDAO<Saida> {
 
+        public SaidaDAO(){
+        try ( Connection conn = DriverManager.getConnection("jdbc:postgresql://localhost/sheepfinancedesktop")) {
+
+            //log.info("Criando tabela cliente ...");
+//            conn.createStatement().executeUpdate(
+//                    "CREATE TABLE cliente ("
+//                    + "id int NOT NULL GENERATED ALWAYS AS IDENTITY CONSTRAINT id_cliente_pk PRIMARY KEY,"
+//                    + "nome varchar(255),"
+//                    + "telefone varchar(30),"
+//                    + "idade int,"
+//                    + "limiteCredito double,"
+//                    + "id_pais int)");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
+    
     @Override
     protected String getStringSQLIncluir() {
         return "INSERT INTO public.\"Entrada\" (conta_id, descricao, data, valor) VALUES (?, ?, ?, ?)";

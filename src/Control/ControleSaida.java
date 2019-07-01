@@ -44,4 +44,10 @@ public class ControleSaida {
         SaidaDAO entradaDAO = new SaidaDAO();
         return entradaDAO.listarTodos();
     }
+    
+   public void ExcluirSaida(int id){
+         SaidaDAO saidaDAO = new SaidaDAO();
+         saidaDAO.excluir(id);
+         
+     }
 }

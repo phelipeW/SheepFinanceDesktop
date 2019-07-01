@@ -27,4 +27,10 @@ public class ControleConta {
         ContaDAO contaDAO = new ContaDAO();
         return contaDAO.listarTodos();
     }
+    
+    public void ExcluirConta(int id){
+         ContaDAO contaDAO = new ContaDAO();
+         contaDAO.excluir(id);
+         
+     }
 }

@@ -49,5 +49,11 @@ public class ControleEntrada {
         return entradaDAO.listarTodos();
     }
     
+     public void ExcluirEntrada(int id){
+         EntradaDAO entradaDAO = new EntradaDAO();
+         entradaDAO.excluir(id);
+         
+     }
+    
 
 }
