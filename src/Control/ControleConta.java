@@ -26,9 +26,5 @@ public class ControleConta {
     public List<Conta> BuscarContas(){
         ContaDAO contaDAO = new ContaDAO();
         return contaDAO.listarTodos();
-//        return null;
     }
-    
-    
-    
 }

@@ -7,23 +7,23 @@ package Model;
 
 import java.io.Serializable;
 import java.util.Date;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  *
  * @author abelo
  */
-public class Saida extends Transacao implements Serializable {
+@Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+public class Saida extends Transacao {
     public int Id;
     public Conta Conta;
     
-    public Saida(String data, Conta conta, Double valor){
-        Descricao = conta.getNome();
-        super.Data = data;
-        super.Valor = valor;
-        Conta = conta;
-    }
-    
-
     @Override
     public void Movimentar(Double valor) {
         Conta.Credito(valor);

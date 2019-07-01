@@ -20,16 +20,9 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class Entrada extends Transacao implements Serializable {
+public class Entrada extends Transacao {
     public int Id;
     public Conta Conta;
-    
-    public Entrada(String data, Conta conta, Double valor){
-        Descricao = conta.getNome();
-        super.Data = data;
-        super.Valor = valor;
-        Conta = conta;
-    }
     
     @Override
     public void Movimentar(Double valor) {

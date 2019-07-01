@@ -5,10 +5,11 @@
  */
 package Control;
 
+import Database.EntradaDAO;
 import Model.Conta;
 import Model.Entrada;
-import java.awt.List;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Date;
 
 
@@ -18,20 +19,32 @@ import java.util.Date;
  */
 public class ControleEntrada {
     public void SalvarEntrada(double valor, String data, Object conta){
+        Conta contaDTO = (Conta)conta;
         
+        Entrada entrada = new Entrada();
+        entrada.setDescricao(contaDTO.getNome());
+        entrada.setData(data);
+        entrada.setValor(valor);
+        entrada.setConta(contaDTO);
+        
+        EntradaDAO entradaDAO = new EntradaDAO();
+        entradaDAO.incluir(entrada);
     }
-    
-    
-    public ArrayList<String> BuscarNomeContas(){
-        return null;
+        
+    public List<String> BuscarNomeContas(){
+        ControleConta controle = new ControleConta();
+        List<Conta> contas = controle.BuscarContas();
+        List<String> nomes = new ArrayList<String>();
+        for(int i = 0; i<contas.size() ;i++){
+            nomes.add(contas.get(i).getNome());
+        }
+        
+        return nomes;
     }
-    
-    public ArrayList<Conta> BuscarContas(){
-        return null;
-    }
-    
-    public ArrayList<Entrada> BuscarEntradas(){
-        return null;
+        
+    public List<Entrada> BuscarEntradas(){
+        EntradaDAO entradaDAO = new EntradaDAO();
+        return entradaDAO.listarTodos();
     }
     
 

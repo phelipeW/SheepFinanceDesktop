@@ -14,7 +14,6 @@ import lombok.Data;
  */
 @Data
 public abstract class Transacao {
-   
     public String Descricao;
     public Double Valor;
     public String Data;
