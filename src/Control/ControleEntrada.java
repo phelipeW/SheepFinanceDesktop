@@ -28,9 +28,12 @@ public class ControleEntrada {
         entrada.setData(data);
         entrada.setValor(valor);
         entrada.setConta(contaDTO.get(0));
+        contaDTO.get(0).Credito(valor);
         
         EntradaDAO entradaDAO = new EntradaDAO();
         entradaDAO.incluir(entrada);
+        
+        
     }
         
     public List<String> BuscarNomeContas(){

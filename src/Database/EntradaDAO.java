@@ -39,7 +39,7 @@ public class EntradaDAO extends AbstractDAO<Entrada> {
     
     @Override
     protected String getStringSQLIncluir() {
-        return "INSERT INTO public.\"Entrada\" (conta_id, descricao, data, valor) VALUES (?, ?, ?, ?)";
+        return "INSERT INTO entrada (conta_id, descricao, data, valor) VALUES (?, ?, ?, ?)";
     }
 
     @Override
@@ -52,7 +52,7 @@ public class EntradaDAO extends AbstractDAO<Entrada> {
 
     @Override
     protected String getStringSQLListar() {
-        return "SELECT * FROM public.\"Entrada\"";
+        return "SELECT * FROM entrada";
     }
 
     @Override
@@ -68,12 +68,12 @@ public class EntradaDAO extends AbstractDAO<Entrada> {
 
     @Override
     protected String getStringSQLExcluir() {
-        return "DELETE FROM public.\"Entrada\" WHERE id=?";
+        return "DELETE FROM entrada WHERE id=?";
     }
 
     @Override
     protected String getStringSQLAlterar() {
-        return "UPDATE public.\"Entrada\" SET nome=?, saldo=? WHERE id=?";
+        return "UPDATE entrada SET nome=?, saldo=? WHERE id=?";
     }
 
     @Override

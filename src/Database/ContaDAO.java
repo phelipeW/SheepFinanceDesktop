@@ -42,7 +42,7 @@ public class ContaDAO extends AbstractDAO<Conta> {
     
     @Override
     protected String getStringSQLIncluir() {
-        return "INSERT INTO public.\"Conta\" (nome, saldo) VALUES (?, ?)";
+        return "INSERT INTO conta (nome, saldo) VALUES (?, ?)";
     }
 
     @Override
@@ -53,7 +53,7 @@ public class ContaDAO extends AbstractDAO<Conta> {
 
     @Override
     protected String getStringSQLListar() {
-        return "SELECT * FROM public.\"Conta\"";
+        return "SELECT * FROM conta";
     }
 
     @Override
@@ -67,12 +67,12 @@ public class ContaDAO extends AbstractDAO<Conta> {
 
     @Override
     protected String getStringSQLExcluir() {
-        return "DELETE FROM public.\"Conta\" WHERE id=?";
+        return "DELETE from conta WHERE id = ?";
     }
 
     @Override
     protected String getStringSQLAlterar() {
-        return "UPDATE public.\"Conta\" SET nome=?, saldo=? WHERE id=?";
+        return "UPDATE conta SET nome=?, saldo=? WHERE id=?";
     }
 
     @Override
@@ -84,7 +84,7 @@ public class ContaDAO extends AbstractDAO<Conta> {
 
     @Override
     protected String getStringSQLOne(String nome) {
-        return "SELECT * FROM public.\"Conta\" WHERE nome='"+nome+"'";
+        return "SELECT * FROM conta WHERE nome='"+nome+"'";
     }
     
     @Override

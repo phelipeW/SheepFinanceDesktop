@@ -21,7 +21,7 @@ public abstract class AbstractDAO<T> {
     static final String DB_URL = "jdbc:postgresql://localhost/sheepfinancedesktop";
    
     static final String USER = "postgres";
-    static final String PASS = "root";
+    static final String PASS = "phelipe";
     
     protected abstract String getStringSQLIncluir();
     protected abstract void mapeamentoObjetoRelationalIncluir(PreparedStatement statement, T entidade) throws Exception;

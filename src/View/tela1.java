@@ -60,7 +60,7 @@ public class tela1 extends javax.swing.JFrame {
     
     public void adicionaLinhaTabelaSaidas(){
         DefaultTableModel model = (DefaultTableModel) jTableSaidas.getModel();
-        Object rowData[] = new Object[3];
+        Object rowData[] = new Object[4];
 
         List<Saida> saidas = controleSaida.BuscarSaidas();
         for(int i = model.getRowCount(); i<saidas.size() ;i++){
